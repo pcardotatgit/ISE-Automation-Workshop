@@ -48,10 +48,8 @@ def send_api_call_function(username,password,method,api_url,headers,payload,resu
     print("\n===================================================================\n")
     authentication = HTTPBasicAuth(username, password)
     response = requests.request(method, api_url, auth=authentication, headers=headers, data = payload, verify=False)
-    print('response :',yellow(response,bold=True))
-    print('response content :',yellow(response.content,bold=True))
-    print() 
-    response_txt='{}'
+    #print('response :',yellow(response,bold=True))
+    #print('response content :',yellow(response.content,bold=True))
 
     if response.status_code==401:
         print(red('\nINVALID API CREDENTIALS !\n',bold=True))    
@@ -63,17 +61,19 @@ def send_api_call_function(username,password,method,api_url,headers,payload,resu
         json_txt_result=response.content       
     else:
         result=1
-        print(green('OKAY WE GOT A RESPONSE FROM ISE',bold=True))
+        print(green('OKAY WE GOT A RESPONSE FROM ISE\n',bold=True))
         if '</title>' not in response.text:
-            json_txt_result = json.dumps(response.json(),indent=4,sort_keys=True, separators=(',', ': '))
+            #json_txt_result = json.dumps(response.json(),indent=4,sort_keys=True, separators=(',', ': '))
+            print(green('Check the Endpoint ANC Policy Assignment in ISE',bold=True))
+            json_txt_result=response.text			
             #print('json_txt_result  : \n',green(json_txt_result,bold=True))    
             # SAVE RESULT
-            with open('./results/'+result_file_name,'w') as file:
-                file.write(json_txt_result)
+            #with open('./results/'+result_file_name,'w') as file:
+            #    file.write(json_txt_result)
         else:
+            print('HERE')		
             json_txt_result=response.text
-            print(red('But something seems to be wrong',bold=True))
-            print('RESULT : ',red(response_txt,bold=True))
+            print(white('Check the Endpoint ANC Policy Assignment in ISE',bold=True))
     # ===================================================================
     return result,json_txt_result
     

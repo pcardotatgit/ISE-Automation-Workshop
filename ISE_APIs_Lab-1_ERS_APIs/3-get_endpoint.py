@@ -116,11 +116,7 @@ if __name__ == "__main__":
     'content-type': "application/json",
     'accept': "application/json"
     }
-    payload={} # <<<<<<<<<<<<<<<<<<< data to send to ISE, mainly for POST, PUT, PATCH calls
-    username = "api_admin"
-    password = "ChangeMe"
-    host = "198.18.133.27"
-    port = "443"   
+    payload={} # <<<<<<<<<<<<<<<<<<< data to send to ISE, mainly for POST, PUT, PATCH calls   
     result_file_name='endpoints.json'
     relative_url='/ers/config/endpoint' # <<<<<<<<<<<<<<<<<<<<<<<<<<< Relative URL here
     api_url=f"https://{host}:{port}{relative_url}"
