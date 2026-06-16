@@ -49,7 +49,7 @@ This workshop content is based on the works done by Thomas Howard, Victor Bovbro
 
 ## References I used :
 
-- [working with pxGrid 2.0] (https://www.youtube.com/watch?v=UVQr9o0TN0c) 
+- [working with pxGrid 2.0](https://www.youtube.com/watch?v=UVQr9o0TN0c) 
 - [Introduction to the Cisco Platform Exchange Grid in ISE ](https://www.youtube.com/watch?v=_aO6oZrYCPE)
 
 Pre requist ... You know what is a REST API,you  are familiar with JSON format, and you already talk python.
@@ -231,11 +231,17 @@ Once done the client and the server are able to send to their conterpart message
 
 Once the communication established client and server must use communication rules to communicate together. pxGrid relies on the STOMP communication for this.
 
-In terms of labs we start with two separate labs in order to get familiar with first websockets, and second with stomp. But you can skip  these two labs and go directly to the pxGrid websocket lab.
+In terms of labs we start with two separate labs in order to get familiar with websockets first, and second with stomp. 
+
+But you can skip  these two labs and go directly to the pxGrid websocket lab.
 
 code under construction
 
 # Lab 11 - STOMP Lab
+
+STOMP is the communication protocol used by pxGrid for the communication between clients and server.
+
+This lab just help to understand how it works
 
 code under construction
 
