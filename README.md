@@ -220,8 +220,7 @@ And before that it is time to address the Certificats exchange for authenticatio
 
 code under contruction
 
-# Lab 10 - WebSocket Lab
-
+# Lab 9 - WebSocket Lab
 
 Websockets is a bi directionnal communication layer between clients and servers which is based on a connected mode.
 
@@ -229,27 +228,27 @@ That means that in order to make the client and the server to talk together, we 
 
 Once done the client and the server are able to send to their conterpart messages in both direction in real time. It is completely similar to a telnet communication.
 
-Once the communication established client and server must use communication rules to communicate together. pxGrid relies on the STOMP communication for this.
+Once the communication established client and server must use communication rules to communicate together. pxGrid relies on the STOMP messaging services for this.
 
-In terms of labs we start with two separate labs in order to get familiar with websockets first, and second with stomp. 
-
-But you can skip  these two labs and go directly to the pxGrid websocket lab.
+This lab aims to get you familiar with websockets.
 
 code under construction
 
-# Lab 11 - STOMP Lab
+# Lab 10 - STOMP Lab
 
-STOMP is the communication protocol used by pxGrid for the communication between clients and server.
+STOMP is basic messaging system which uses a simple communication protocol. STOMP is the technology used by pxGrid for data exchange.
+
+pxGrid publishers use STOMP over websocket to share their data with pxGrid subscribers.
 
 This lab just help to understand how it works
 
 code under construction
 
-# Lab 12 - pxGrid websocket Lab
+# Lab 11 - pxGrid websocket Lab
 
 under construction
 
-# Lab 13 - pxGrid Direct Lab
+# Lab 12 - pxGrid Direct Lab
 
 under construction
  
