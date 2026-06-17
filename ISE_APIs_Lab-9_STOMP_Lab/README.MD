@@ -16,9 +16,9 @@ Let's use CoilMQ which is a STOMP server from the python community. This one is 
 
 CoilMQ installation is very simple, follow the here under steps
 
-Create a working directory and open a terminal console into this directory :
+Create a working directory and open a terminal console into this directory
 
-( I assume that you know how to execute the following instruction on your python machine )
+( I assume that you know how to execute the following instruction on your python machine. On windows machine you can type, a then b , c , d and e )
 
 - Create a python virtual environment 
 
@@ -30,9 +30,9 @@ Create a working directory and open a terminal console into this directory :
     
 - We are ready to go. you can just start the CoilMQ server :
 
-    **Just type CoilMQ -b 0.0.0.0 -p 61613**
+    **Just type : CoilMQ -b 0.0.0.0 -p 61613**
    
-The server starts and listen on localhost on port 61613.  
+The server starts and listen on localhost on port 61613.  ( You will probably have to Authorize the Application in the workstation Firewall, a windows popup is supposed to appear. Then authorize the application )
 
 ( notice : CoilMQ can use default settings you can change by editing the coilmq.cfg file in the Lib/site-packages/config folder of the python virtual environment ).
 
@@ -44,7 +44,7 @@ Once again we are going to use a ready to use package from the python community.
 
 Here are the steps :
 
-- create another working directory and create a python virtual environment into it.
+- create another working directory and create a python virtual environment into it. Or you can open a second terminal and activate the python environment ( type : a )
 - Install the stomp client python module , from a terminal console open into this second working directory.
 
     **pip install stomp.py**
@@ -80,9 +80,11 @@ Have a look to the section which describe the Listener. We see the instructions 
 
 So we understand that once connected to the server and subscrided to a topic ( a Queue ) our STOMP client is watching this Queue and monitors every messages that will come into it. The **def on_message(self, headers, body):** of this class will capture every messages sent ot the queue in the **headers** and **body** variable, then we will be able to compute them inside this function.
 
+Don't exit from the CLI STOMP Client, we will use it later. Open a third terminal console into the same working directory and activate again the python virtual environment.
+
 - Run the **publisher_send_message.py** script. 
 
-    **python send_message.py Hello World**
+    **python publisher_send_message.py Hello World**
     
 The expected result is to see in the python console the message : **received a message "Hello World"**.
 
