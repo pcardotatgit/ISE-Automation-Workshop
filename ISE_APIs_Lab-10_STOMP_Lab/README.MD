@@ -2,7 +2,11 @@
 
 This lab aims to get you familiar with the STOMP architecture which is used by ISE pxGrid.
 
-This architecture contains a STOMP server which manage a messaging services, a subscriber which will subscribe to a topic ( A topic is a messaging queue that will collect messages sent to the queue ) and a publisher which will send messages to the queue. Messages the subscriber will be avle to see.
+The architecture of our lab contains  :
+
+- a STOMP server which manages a messaging service
+- a publisher which send messages to Message queues ( a topic ).
+- a subscriber which will subscribe to the same topic as the publisher and which will be able any messages sent by the publisher.
 
 # Setup the server
 
@@ -24,7 +28,7 @@ Create a working directory and open a terminal console into this directory :
 
     **pip install CoilMQ**
     
-We are ready to go. you can just start the CoilMQ server :
+- We are ready to go. you can just start the CoilMQ server :
 
     **Just type CoilMQ -b 0.0.0.0 -p 61613**
    
@@ -40,27 +44,27 @@ Once again we are going to use a ready to use package from the python community.
 
 Here are the steps :
 
-- create another working directory and create into a python virtual environment
-- From a terminal console openned into this second working directory Install the stomp client
+- create another working directory and create a python virtual environment into it.
+- Install the stomp client python module , from a terminal console open into this second working directory.
 
     **pip install stomp.py**
     
 We are ready to go and we can test our setup at this stage thank to STOMP CLI client we just installed
 
-Within the terminal console type :
+- Within the terminal console type :
 
     **stomp -H localhost -P 61613**
     
-You are supposed to see the prompt changing to **>**, meaning that the session is started and you can send commands.
+You are supposed to see the prompt changing to **>** ( greater than ), meaning that the session is started and you can send commands.
 
-Now type :
+- Now type :
 
     **subscribe /queue/test**
     **send /queue/test hello world**
     
 You probable understand what we do here. We subscribe to a queue named queue/test and we send the "hello world" message into it.
 
-Our Stomp Client is still connected you can type :
+- Our Stomp Client is still connected you can type :
 
     **help** 
     
@@ -75,7 +79,7 @@ Have a look to the section which describe the Listener. We see the instructions 
 
 So we understand that once connected to the server and subscrided to a topic ( a Queue ) our STOMP client is watching this Queue and monitors every messages that will come into it. The **def on_message(self, headers, body):** of this class will capture every messages sent ot the queue in the **headers** and **body** variable, then we will be able to compute them inside this function.
 
-Run the **publisher_send_message.py** script. 
+- Run the **publisher_send_message.py** script. 
 
     **python send_message.py Hello World**
     
@@ -85,12 +89,16 @@ This message actually comes from the queue in the STOMP server and you probably 
 
 # Setup the subscriber
 
+**STILL UNDER CONSTRUCTION**
+
 Our final goal is to have subscribers that will see messages sent by publishers.
 
 Have a look to the **subscriber.py** python script.
 
 Repeat the installation step used for the publisher and run the subscriber. This one is just waiting for messages.
 
-Go back to the publisher and then use the send command to send a new message to the Queue. The expected result is to see this message in the subscriber console.
+We can use the STOMP Client used prior, connect and subscribe to the topic
 
-**STILL UNDER CONSTRUCTION**
+Go back to the publisher and then send a new message to the Queue. The expected result is to see this message in the subscriber console.
+
+
