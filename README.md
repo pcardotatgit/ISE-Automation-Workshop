@@ -43,9 +43,9 @@ Identity Service Engine is already ready to address threats brought by AI agents
 
 # The goal of this Workshop 
 
-The goal of this workshop is to offer a guided fast path to programmer who want to learn about ISE Automation with no delay.
+The goal of this workshop is to offer a guided fast path to programmers who want to learn about ISE Automation with no delay and a minimum of complexity. Which is a big challenge when we talk about Cisco ISE automation. I hope that I was able to reach that goal.
 
-This workshop content is based on the works done by Thomas Howard, Victor Bovbrov and Tailor cooks. Thank a lot to these 3 guys for the amazing documentation work they did. I just took Your workshops and re organized them a little bit. But the documentation you created guys was perfect for me, to help to understand with no effort how to do the things !
+This workshop content is based on the works done by Thomas Howard, Victor Bovbrov and Tailor cooks. Thanks a lot to you guys for the amazing documentation you created. I just took your workshops and code, and just put them into my own format and I re organized them into a logical agend. The documentation you created guys was perfect for me, to help me to understand with no effort how to do the things !
 
 ## References I used :
 
@@ -58,13 +58,17 @@ Pre requist ... You know what is a REST API,you  are familiar with JSON format, 
 
 All these labs use the same use case which is very representative of the ISE automation capability.
 
-This is the ANC Use Case. Adaptative Network Containement is a feature of ISE wich allows to exclude an Endpoint out of the network faor any good reasons like an Endpoint Infection. 
+This is the ANC Use Case. Adaptative Network Containement is a feature of ISE which allows adminstrators to exclude Endpoints out of the network for any good reasons like the Infection of this Endpoint. 
 
-This feature has in ISE, a dedicated GUI which allows to create ANC policies ( QUARANTINE, PORT BOUNCE, Re AUTHENNTICATE, SHUTDONW ) and that allows to add to these policies endpoints by their current IP addresses or by their Mac Addresses.
+This feature has a dedicated GUI in ISE which allows to create ANC policies ( QUARANTINE, PORT BOUNCE, Re AUTHENNTICATE, SHUTDONW ) and which allows to add endpoints to these policies by their current IP addresses or by their Mac Address.
 
-This feature has APIs, wich allows to completed automate it.
+It was great to make this native capability of ISE a "Click and Go" feature as it helps to go very fast on host isolation whenever it is needed.
 
-So the final goals for all labs is to automate ANC.
+It was great as well to expose dedicated APIs for this feature that allow to completely automate it. 
+
+Host isolation of host infected by malwares or ransomwares can be achieved instantly when the infection is detected.
+
+So goal for every labs will be to automate ANC.
 
 ## You need an ISE Lab.
 
@@ -255,3 +259,6 @@ under construction
 under construction
  
 # resources 
+
+In this section some references to not miss :
+
