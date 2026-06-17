@@ -94,12 +94,26 @@ This message actually comes from the queue in the STOMP server and you probably 
 
 Our final goal is to have subscribers that will see messages sent by publishers.
 
+**Option 1**
+
+We already have one subscriber which is the CLI STOMP Client we used prior.
+
+Go back to it, or open again a terminal console and activate the python virtual environment.
+Then connect again and suscribe to the /queue/test topic exactly as we did prior. Then waiting
+
+**Option 2**
+
 Have a look to the **subscriber.py** python script.
 
-Repeat the installation step used for the publisher and run the subscriber. This one is just waiting for messages.
+Repeat the installation step used for the publisher and run **subscriber.py**. 
 
-We can use the STOMP Client used prior, connect and subscribe to the topic
+The script is waiting now for messages.
 
-Go back to the publisher and then send a new message to the Queue. The expected result is to see this message in the subscriber console.
+**Try It**
 
+Go back to the publisher and then send a new message to the Queue. 
+
+The expected result is to see this message in the subscriber console.
+
+Every suscribers connected to the topic will see the same message in real time.
 
