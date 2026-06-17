@@ -60,6 +60,7 @@ You are supposed to see the prompt changing to **>** ( greater than ), meaning t
 - Now type :
 
     **subscribe /queue/test**
+    
     **send /queue/test hello world**
     
 You probable understand what we do here. We subscribe to a queue named queue/test and we send the "hello world" message into it.

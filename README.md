@@ -105,7 +105,7 @@ Download the lab scripts into a working directory into your laptop. Unzip the do
 
 - then type **d**
 
-- finally type e
+- finally type **e**
 
 Okay. Installation is done.
 
