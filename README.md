@@ -202,7 +202,11 @@ We just add to our syslog server a Webex Bot logic that will display an alert ev
 
 The alert is a web Formular which allows to isolate the endpoint by clicking on a confirmation button.
 
-Code is under contruction.
+In this lab you just have to deploy a webex bot logic, and use it. Instruction are shared to link this bot logic to what has been done before.
+
+We don't details in this lab how the bot logic is built. Because these details are already documented in the Webex Alerting system project in this github.
+
+[Build a Webex advanced alerting system](https://github.com/pcardotatgit/webex_for_xdr_part-1_card_examples)
 
 # Lab 6 - Automate host isolation thanks to Cisco XDR Automation
 
