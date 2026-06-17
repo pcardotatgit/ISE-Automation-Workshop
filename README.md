@@ -107,7 +107,7 @@ Download the lab scripts into a working directory into your laptop. Unzip the do
 
 - finally type **e**
 
-Okay. Installation is done.
+Okay. Installation is done... It took only 2 minutes.
 
 Now whenever you want to run the labs, you have to open a CMD console in the script directory, then type the letter **a** to start the python virtual environment and then run the scripts.
 
