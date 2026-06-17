@@ -248,7 +248,7 @@ STOMP is the technology used by pxGrid for data exchange. ISE pxGrid publishers 
 
 This lab just help to understand how it works, and it is a very good introduction to pxGrid websocket services
 
-code under construction
+[Access to the Lab](https://github.com/pcardotatgit/ISE-Automation-Workshop/tree/main/ISE_APIs_Lab-10_STOMP_Lab)
 
 # Lab 11 - pxGrid websocket Lab
 
