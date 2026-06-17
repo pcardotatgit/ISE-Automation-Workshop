@@ -226,31 +226,60 @@ And before that it is time to address the Certificats exchange for authenticatio
 
 code under contruction
 
-# Lab 9 - WebSocket Lab
+# Lab 9 - STOMP Lab
 
-Websockets is a bi directionnal communication layer between clients and servers which is based on a connected mode.
+STOMP ( Simple Text Oriented Messaging Protocol ) is messaging system which uses a simple and straigth forward communication protocol. 
 
-That means that in order to make the client and the server to talk together, we must first established a connected and authenticated communication. The client must connect to the server and must provide its credentials, then the server must authenticate the client and acknowledge the connection. 
+In a STOMP architecture a server manages the messaging service and clients will establish persistent connection to the server. Clients will be publishers ( clients wich send messages ) and subscribers ( clients that listen to messages ).  Messages are sent to separate spaces named topics which are nothing more than messages queue dedicated to specific topics. 
 
-Once done the client and the server are able to send to their conterpart messages in both direction in real time. It is completely similar to a telnet communication.
+STOMP is the technology used by pxGrid for data exchange. ISE pxGrid publishers use STOMP over websocket to share their data with pxGrid subscribers, and ISE hosts the STOMP service.
 
-Once the communication established client and server must use communication rules to communicate together. pxGrid relies on the STOMP ( Simple Text Oriented Messaging Protocol ) messaging services for this.
-
-This lab aims to get you familiar with websockets.
-
-code under construction
-
-# Lab 10 - STOMP Lab
-
-STOMP is messaging system which uses a simple communication protocol. In a STOMP architecture a server manages the messaging service and clients will establish persistent connection to the server. Clients will be publishers ( clients wich send messages ) and subscribers ( clients that listen to messages ).  Messages are sent to separate spaces named topics which are nothing more than messages queue dedicated to specific topics. 
-
-STOMP is the technology used by pxGrid for data exchange. ISE pxGrid publishers use STOMP over websocket to share their data with pxGrid subscribers, and ISE manages STOMP service.
+At the same time, ISE is a publisher and a subscriber which are using the STOMP services
 
 This lab just help to understand how it works, and it is a very good introduction to pxGrid websocket services
 
 [Access to the Lab](https://github.com/pcardotatgit/ISE-Automation-Workshop/tree/main/ISE_APIs_Lab-10_STOMP_Lab)
 
+# Lab 10 - WebSocket Lab
+
+Websockets is a bi directionnal communication channel between clients and servers which is based on a connected mode.
+
+That means that in order to make the client and the server to talk together, we must first established a connection from the client to the server and of course manage authentication. 
+
+The server is supposed to authenticate the client and acknowledge the connection. 
+
+Once done the client and the server are able to send messages to each other. At any time and in both directions. Messages sent are received instantly in real time.
+
+Websockets are perfect as a communication layer for chatting applications. 
+
+Among the benefits this technology brings we have the capability to easily make clients that are behind firewalls in the internal network, to talk with a central server which is on the public INTERNET. We can imagine how large the scope of application is and how security control is important as well.
+
+Another benefits is the capability to use a web browser as a client as websockets connection can be managed by javascript.
+
+In ISE, Websockets is the underlaying communication channel used by the ISE STOMP architecture to allows pxGrid Clients to interact with ISE.
+
+Once the communication established client and server must use communication rules to communicate together. pxGrid relies on the STOMP ( Simple Text Oriented Messaging Protocol ) messaging services for this.
+
+This lab aims to get you familiar with websockets. 
+
+Deploy the scripts located into the **ISE_APIs_Lab-9_websocket_lab** subfolder.
+
+Installation is the same as usual.
+
+First activate the python virtual environment and run the **1-websocket_server.py**
+
+Second, activate in a second time the same python virtual environment in a second terminal and then run the **2-websocket_client.py**
+
+You are supposed to see a connection between the client and the server, then you can chat.
+
+Review the python code to understand what we do.  We need the **websockets** and the **asyncio** python modules.
+
 # Lab 11 - pxGrid websocket Lab
+
+Okay, at this stage we understand every layer underneeth pxGrid. it is time to use it.
+
+Let's put everything together and let's write our custom pxGrid client.
+
 
 under construction
 
@@ -258,6 +287,11 @@ under construction
 
 under construction
  
+# Lab 13 - and MCP Server for ise
+
+under contruction
+
+
 # resources 
 
 In this section some references to not miss :
