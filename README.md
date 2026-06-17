@@ -123,7 +123,7 @@ In order to make things fast and straight forward we use username and password i
 
 First step is to create an ERS API full Administrator in ISE. Check that ERS services are enable.
 
-Edit the **config.py** file and udpate the empty variables.
+Edit the **config.json** file and udpate the empty variables.
 
 Now run the scripts one after the other and check the results either in the script console, or in the ISE server.
 
@@ -151,6 +151,8 @@ Let's start with pxGrid REST API which are quite simple to use. They work the sa
 Once done we are able to retrieve a secret our python client can use in the API calls.
 
 Installation of the scripts is the same as usual. 
+
+Once the python virtual environment has been created and python module installed, edit the **config.json** and **config_pxgrid.json** file and udpate the variables.
 
 In ISE check that pxGrid is enabled. And we have to enable username/password based client authentication. ( once again, use go straight forward and dont use certificate based authentication ). Check in ISE that some pxGrid services are published and available to pxGrid clients. For this lab we the the com.cisco.ise.session, com.cisco.ise.config.anc topics.
 
@@ -228,7 +230,7 @@ That means that in order to make the client and the server to talk together, we 
 
 Once done the client and the server are able to send to their conterpart messages in both direction in real time. It is completely similar to a telnet communication.
 
-Once the communication established client and server must use communication rules to communicate together. pxGrid relies on the STOMP messaging services for this.
+Once the communication established client and server must use communication rules to communicate together. pxGrid relies on the STOMP ( Simple Text Oriented Messaging Protocol ) messaging services for this.
 
 This lab aims to get you familiar with websockets.
 
@@ -236,11 +238,11 @@ code under construction
 
 # Lab 10 - STOMP Lab
 
-STOMP is basic messaging system which uses a simple communication protocol. STOMP is the technology used by pxGrid for data exchange.
+STOMP is messaging system which uses a simple communication protocol. In a STOMP architecture a server manages the messaging service and clients will establish persistent connection to the server. Clients will be publishers ( clients wich send messages ) and subscribers ( clients that listen to messages ).  Messages are sent to separate spaces named topics which are nothing more than messages queue dedicated to specific topics. 
 
-pxGrid publishers use STOMP over websocket to share their data with pxGrid subscribers.
+STOMP is the technology used by pxGrid for data exchange. ISE pxGrid publishers use STOMP over websocket to share their data with pxGrid subscribers, and ISE manages STOMP service.
 
-This lab just help to understand how it works
+This lab just help to understand how it works, and it is a very good introduction to pxGrid websocket services
 
 code under construction
 
