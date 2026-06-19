@@ -107,11 +107,10 @@ Download the lab scripts into a working directory into your laptop. Unzip the do
 
 - finally type **e**
 
-Okay. Installation is done... It took only 2 minutes.
+Okay. Installation is done... It takes only 2 minutes and the JUMPHOST in DCLOUD labs is ready to be used with no addtionnal setup for this procedure.
 
-Now, whenever you want to run the script in the selected lab, you have to open a CMD console in the script directory, then type the letter **a** to start the python virtual environment and then run the scripts.
+Now, whenever you want to run the script in the selected lab, you have to open a CMD console in the script directory, then type the letter **a** to start the python virtual environment and then run the required python scripts.
 
-More details are shared in the lab guide.
 
 # Lab 1 - ERS APIs
 
