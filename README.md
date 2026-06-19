@@ -185,7 +185,9 @@ Your challenge in this lab is to detect the attack in real time directly in the 
 
 ## Roll out the Lab
 
-- First step, let's identify in ISE an Endpoint we could use for the demo. The goal is to get close to a real life scenario. So from the ISE Operation => live Logs,  identify an host which has an IP address, and better than that check if you see this endpoint in ISE Live Session as well.
+Pre requisit for this lab : You have done Lab 3.  Copy the **z_pxgrid-creds.txt** file created by scripts in Lab 3. You will have to paste it in the **demo_syslog_server** working directory.
+
+- First step, let's identify in ISE an Endpoint we could use for the demo. The goal is to get close to a real life scenario. So from the ISE Operation => live Session, identify an host in session which has an IP address ( the host must have an IP address ).
 
 Copy the IP address of this host. We need it to setup our demo data.
 
@@ -193,7 +195,7 @@ Copy the IP address of this host. We need it to setup our demo data.
     - run it and when asked type the IP addess you selected before from ISE Live Logs
     - Okay ready. Don't close the console
     
-- Step 3 : deploy the **demo_syslog_server**, into python virtual environment and just run it. You are supposed to see it waiting for syslogs.
+- Step 3 : deploy the **demo_syslog_server**, into python virtual environment and just run it. You are supposed to see it waiting for syslogs. Paste the **z_pxgrid-creds.txt** file created by scripts in Lab 3 in the in the **demo_syslog_server** working directory.
 
 The syslog server is a very basic tools packaged for the demo. Don't hesitate to review the code, it is quite easy to understand.
 
@@ -203,9 +205,11 @@ For information, I was able to use it in heavy loaded labs environments , and it
 
 - Step 4 , come back to the **demo_syslog_generator** console and run the **1-send_syslog_from_syslogs_text_file.py**
 
-You are supposed to see parsed syslog messages arriving in the **demo_syslog_server** console. When the syslog demo file has been completely sent then the syslog server displays the list of Attacker IP addresses discovered in logs.
+You are supposed to see parsed syslog messages arriving in the **demo_syslog_server** console. When the syslog demo file has been completely sent, then the syslog server displays the list of Attacker IP addresses discovered in logs followed by result of operation for adding the infected IP address you selected prior.
 
-Among the IP address you will recognize the IP address you selected prior, and then you can check in ISE ANC Policy Endpoint Assignment that this IP address is now part of the Quarantined enpoint.
+You can check in ISE ANC Policy Endpoint Assignment that this IP address is now part of the Quarantined enpoint.
+
+**Notice ! ** for successful QUARANTINE, as we use the IP address as the endpoint identifier, the ip address must have a current session in ISE, because ISE check this to execute the assignment to QUARANTINE.
 
 If you have look to the syslog server code you will recognize the **7_pxgrid_add_end_point_to_anc_policy.py** from lab_3. We just packaged it a little bit for this current lab.
 
@@ -215,7 +219,6 @@ The script is now named **pxgrid_add_end_point_to_anc_policy.py** and is importe
 
 It is now customized to handle IP addresses instead of mac addressses.
 
-Code is under construction
 
 # Lab 5 - Use Webex Chat Bot to receive alerts on a phone and trigger Endpoint isolation
 
