@@ -211,6 +211,10 @@ If you have look to the syslog server code you will recognize the **7_pxgrid_add
 
 You must update the variables in **config_pxgrid.txt** in order to grant the API interaction with ISE. 
 
+The script is now named **pxgrid_add_end_point_to_anc_policy.py** and is imported as an external resources into the syslog server python code. It is now a re usable component, the function it contains can be called directly from the syslog server script.
+
+It is now customized to handle IP addresses instead of mac addressses.
+
 Code is under construction
 
 # Lab 5 - Use Webex Chat Bot to receive alerts on a phone and trigger Endpoint isolation
