@@ -172,7 +172,9 @@ The final goal is to QUARANTINE an Endpoint thank to pxGrid API REST Calls
 
 This lab is summarizes previous labs. At this stage we know how to consume ISE APIs for the ANC use case.
 
-Now let's do it for real, exactly like we want to deploy an Isolation service in oour network if we discover an infected Endpoint.
+Now let's do it for real, exactly like we would want to deploy an Isolation service in oour network.
+
+If we discover an infected Endpoint thanks to any detection solution, then we want to automatically exclude it out of the network.
 
 We can use the **Cisco Secure Network Analytics 7.5.3 Test Drive v1.0** DLCOUD lab to reproduce completely this scenario, but instead of doing that, let's use a custom syslog server and let's send to it syslog Cisco Secure Firewall IPS messages that alert about an internal IP address that is sending XSS and SQL Injection Attacks to internal Web Server.
 
@@ -180,7 +182,36 @@ This kind of alert is what we can call an High fidelity alert which confirms us 
 
 We use a separate syslog generator which send real syslogs from Cisco NGIPS we saved into a text file which is read and sent by the syslog generator.  Thanks to this tiny component , we don't need to setup the a real attacks. But once again, the DLCOUD lab mentionned prior allows to reproduce this attack for real.
 
-Your challenge in this lab is to detect the attack directly in the syslog server, and thanks to a python function you have to write your self, you to add the infected internal machine to a QUARANTINE policy. 
+Your challenge in this lab is to detect the attack in real time directly in the syslog server, and thanks to a python function you have to write, you must to add the infected internal machine to a QUARANTINE ANC policy. 
+
+## Rool out the Lab
+
+- First step, let's identify in ISE an Endpoint we could use for the demo. The goal is to get close to a real life scenario. So from the ISE Operation => live Logs,  identify an host which has an IP address, and better than that check if you see this endpoint in ISE Live Session as well.
+
+Copy the IP address of this host. We need it to setup our demo data.
+
+- Second, deploy the **demo_syslog_generator**. Same procedure as usual then from the terminal console open into the working directory you selected for it and start with the **0-create_syslog_file.py**.
+    - run it and when asked type the IP addess you selected before from ISE Live Logs
+    - Okay ready. Don't close the console
+    
+- Step 3 : deploy the **demo_syslog_server**, into python virtual environment and just run it. You are supposed to see it waiting for syslogs.
+
+The syslog server is a very basic tools packaged for the demo. Don't hesitate to review the code, it is quite easy to understand.
+
+You will see into the code the syslog server part, the Cisco FTD IPS logs parser part and the ISE Quarantine part.
+
+For information, I was able to use it in heavy loaded labs environments , and it works very well with a lot of power. It is not only a gadget for demo.
+
+- Step 4 , come back to the **demo_syslog_generator** console and run the **1-send_syslog_from_syslogs_text_file.py**
+
+You are supposed to see parsed syslog messages arriving in the **demo_syslog_server** console. When the syslog demo file has been completely sent then the syslog server display the list of Attacker IP addresses discovered in logs.
+
+Among the IP address you will recognize the IP address you selected prior, and then you can check in ISE ANC Policy Endpoint Assignment that this IP address is now part of the Quarantined enpoint.
+
+If you have look to the syslog server code you will recognize the **7_pxgrid_add_end_point_to_anc_policy.py** from lab_3. We just packaged it a little bit for this current lab.
+
+
+
 
 You have to identify the infected machine, and you have to write the missing piece of code required into the syslog server code.
 
@@ -290,8 +321,13 @@ under construction
 # Lab 12 - pxGrid Direct Lab
 
 under construction
+
+# Lab 13 - pxGrid CLI
+
+under contruction
+
  
-# Lab 13 - and MCP Server for ise
+# Lab 14 - MCP Server for ise
 
 under contruction
 
