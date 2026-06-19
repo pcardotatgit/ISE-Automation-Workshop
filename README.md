@@ -204,36 +204,27 @@ For information, I was able to use it in heavy loaded labs environments , and it
 
 - Step 4 , come back to the **demo_syslog_generator** console and run the **1-send_syslog_from_syslogs_text_file.py**
 
-You are supposed to see parsed syslog messages arriving in the **demo_syslog_server** console. When the syslog demo file has been completely sent then the syslog server display the list of Attacker IP addresses discovered in logs.
+You are supposed to see parsed syslog messages arriving in the **demo_syslog_server** console. When the syslog demo file has been completely sent then the syslog server displays the list of Attacker IP addresses discovered in logs.
 
 Among the IP address you will recognize the IP address you selected prior, and then you can check in ISE ANC Policy Endpoint Assignment that this IP address is now part of the Quarantined enpoint.
 
 If you have look to the syslog server code you will recognize the **7_pxgrid_add_end_point_to_anc_policy.py** from lab_3. We just packaged it a little bit for this current lab.
 
-
-
-
-You have to identify the infected machine, and you have to write the missing piece of code required into the syslog server code.
-
-An easy path can be to have a look to the proposed solution.
-
-The expected result is :
-
-You start with an empty ANC policy assignment list, then you send the syslog messages and afet a few second the infected endpoint must appear into the ANC policy assignment list.
-
-It's up to You
+You must update the variables in **config_pxgrid.txt** in order to grant the API interaction with ISE. 
 
 Code is under construction
 
 # Lab 5 - Use Webex Chat Bot to receive alerts on a phone and trigger Endpoint isolation
 
-This lab is just here to complete the above scenario with an alerting system which serves as an approval system as well thanks to webex.
+This lab is just here to complete the Lab 4 scenario with an addtional alerting system which brings as an approval process in order to involve Security Administrators in the endpoint isolation process.
 
-We just add to our syslog server a Webex Bot logic that will display an alert every time an infected machine is detected. 
+Here, we just add a Webex Bot logic to our syslog server that will send an alert to Security Administrator every time an infected machine is detected. 
 
-The alert is a web Formular which allows to isolate the endpoint by clicking on a confirmation button.
+Thanks to this, administrators will be aware of a threat in real time, and they will be able to confirm the host isolation from the alet formular.
 
-In this lab you just have to deploy a webex bot logic, and use it. Instruction are shared to link this bot logic to what has been done before.
+In this lab you just have to deploy a new version of the syslog server which includes a webex bot logic, and use it. 
+
+Instruction are shared to link this bot logic to what has been done before.
 
 We don't details in this lab how the bot logic is built. Because these details are already documented in the Webex Alerting system project in this github.
 
