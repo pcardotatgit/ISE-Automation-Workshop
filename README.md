@@ -184,7 +184,7 @@ We use a separate syslog generator which send real syslogs from Cisco NGIPS we s
 
 Your challenge in this lab is to detect the attack in real time directly in the syslog server, and thanks to a python function you have to write, you must to add the infected internal machine to a QUARANTINE ANC policy. 
 
-## Rool out the Lab
+## Roll out the Lab
 
 - First step, let's identify in ISE an Endpoint we could use for the demo. The goal is to get close to a real life scenario. So from the ISE Operation => live Logs,  identify an host which has an IP address, and better than that check if you see this endpoint in ISE Live Session as well.
 
