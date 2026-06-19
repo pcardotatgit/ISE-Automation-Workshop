@@ -317,7 +317,7 @@ under construction
 under contruction
 
  
-# Lab 14 - MCP Server for ise
+# Lab 14 - MCP Server for ISE
 
 under contruction
 
