@@ -271,17 +271,19 @@ Review the **syslog_server.py** code and pay attention to the way we query the e
 
 There is an **if statement** based on the value of the **use_webex_bot** variable.
 
-If **use_webex_bot** is equal to 1, then instead of querying ISE directly for host isolation, we invoke and **send_alert** function which sends an alert adaptive card into the Webex Room.
+If **use_webex_bot** is equal to 1, then instead of querying ISE directly for host isolation, we invoke a **send_alert** function which sends an alert adaptive card to the Webex Room.
 
 So stop the syslog server, then edit the **syslog_server.py** script and change the value of the  **use_webex_bot** to **1**. And start again the syslog server.
 
-Run again the **1-send_syslog_from_syslogs_text_file.py** script in order to send again the syslog messages.
+Go to the **"demo_syslog_generator"** console and run again the **1-send_syslog_from_syslogs_text_file.py** script.
 
-Same things as before happen except the fact that instead of Query ISe for endpoint isolation, now an alert is sent to the Webex Alert Room.
+Same things as in Lab 4 happen, except the fact that instead of Query ISE for endpoint isolation, now we receive an alert in the Webex Alert Room.
 
-Confirm the host isolation in the Alert formular. a Final confirmation message will be sent in the Alert Room. Then you can check ISE ANC Policy Endpoint Assignment.
+Confirm the host isolation in the Alert formular. a Final confirmation message will be sent when every thing is done. 
 
-Now the **pxgrid_resources** are invoked by the webex bot logic and not by the syslog server. 
+Then you can check ISE ANC Policy Endpoint Assignment.
+
+Now the API Call in the **pxgrid_resources** is invoked by the webex bot logic after manual confirmation and not automatically by the syslog server. 
 
 
 # Lab 6 - Automate host isolation thanks to Cisco XDR Automation
