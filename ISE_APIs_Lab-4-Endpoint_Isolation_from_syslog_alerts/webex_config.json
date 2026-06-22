@@ -1,0 +1,6 @@
+{
+    "WEBEX_BOT_TOKEN":"xxxxx",
+    "ALERT_ROOM_ID":"xxxxx",
+    "version":"1.0",
+    "URL" : "https://webexapis.com/v1/messages"
+}

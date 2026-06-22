@@ -45,11 +45,13 @@ def quarantine_endpoint(endpoint_ip_address):
     loguer(env.level+" def quarantine_endpoint() in pxgrid_resources.py : >")
     # ===================================================================    
     print(yellow('REFERENCE : https://github.com/cisco-pxgrid/pxgrid-rest-ws/wiki/ANC-configuration',bold=True),'\n')
-    a=input('Is the ISE server IP address is 198.18.133.27 ? Press Enter to confirm or enter the correct ip address : ')
+    a=input(f'Is the ISE server IP address is {endpoint_ip_address} ? Press Enter to confirm or enter the correct ip address : ')
     if a=='':
         pxgrid_hostname='198.18.133.27'
     else:
         pxgrid_hostname=a
+    relative_url='/pxgrid/control'
+    port='8089'
     api_url=f"https://{pxgrid_hostname}:{port}{relative_url}"
     
     print('api_url : ',yellow(api_url,bold=True))

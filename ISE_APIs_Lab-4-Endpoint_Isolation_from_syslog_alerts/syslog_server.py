@@ -12,14 +12,17 @@ from datetime import datetime, date, timedelta
 import sys
 from ftd_syslog_parser import *
 from pxgrid_resources import *
+from send_webex_messages import *
 
 dateTime = datetime.now()
 HOST, PORT = "0.0.0.0", 514
+use_webex_bot=1
 
 # here under syslog server functions
 class SyslogUDPHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
+        global use_webex_bot
         # get syslog message receive in the socket
         data = bytes.decode(self.request[0].strip())
         socket = self.request[1]
@@ -39,9 +42,19 @@ class SyslogUDPHandler(socketserver.BaseRequestHandler):
                     print('-',ip)
             print('\n===========================================')
             print(yellow('- Use pxGrid REST APIs and query Cisco ISE for quarantine for : '+ip,bold=True))
-            a= input('\nDO You want ISE to add this ip Address to the ANC Policy ? Y / N : ')
-            if a=='Y' or a=='y':            
-                result=quarantine_endpoint(infected_ip_address)
+            a= input('\nDo You want ISE to add this ip Address to the ANC Policy ? Y / N : ')
+            if a=='Y' or a=='y':  
+                if use_webex_bot:
+                    print(yellow('\n- You decided to send an alert to webex',bold=True))
+                    result=send_alert(infected_ip_address) # send an alert to webx for Endpoint Isolation Approval
+                    result = { 'status':'Alert To Webex Sent'}
+                else:
+                    print(yellow('\n- You decided to directly isolate endpoint in ISE',bold=True))
+                    result=quarantine_endpoint(infected_ip_address) # Query ISE pxgrid API to isolate endpoint
+                    result = { 'status':'ISE Isolation Requested'}
+            else:
+                result = { 'status':'Dont isolate'}
+            print("\nresult : ",yellow(result,bold=True))                 
             if result['status']=='FAILURE':
                 print(red('- ERROR !',bold=True))
             else:

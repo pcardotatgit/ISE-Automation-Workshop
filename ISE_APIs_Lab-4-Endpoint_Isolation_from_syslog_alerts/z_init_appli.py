@@ -7,7 +7,7 @@ import glob
 import os
 
 
-def init_appli():  
+def init_appli():
     os.remove("a.bat")
     os.remove("b.bat")
     os.remove("c.bat")
@@ -15,8 +15,9 @@ def init_appli():
     #os.remove("e.bat")
     with open('a.bat','w') as file:
         file.write('venv\\scripts\\activate')    
-
-        
+    with open('b.bat','w') as file:
+        file.write('python syslog_server.py') 
+       
 if __name__=="__main__":
     #create_structure()
     init_appli()    
