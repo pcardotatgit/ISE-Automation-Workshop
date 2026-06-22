@@ -185,11 +185,11 @@ Your challenge in this lab is to detect the attack in real time directly in the 
 
 ## Roll out the Lab
 
-Pre requisit for this lab : You have done Lab 3.  Copy the **z_pxgrid-creds.txt** file created by scripts in Lab 3. You will have to paste it in the **demo_syslog_server** working directory.
+Pre requisit for this lab : You have done Lab 3.  Copy the **z_pxgrid-creds.txt** file created by scripts in Lab 3. You will have to paste it in the **"demo_syslog_server"** working directory.
 
 **Prepar this lab**
 
-- Create a working directory. exampe : **demo_syslog_server**. Or you can decide to work in the **ISE_APIs_Lab-4-Endpoint_Isolation_from_syslog_alerts** folder.
+- Create a working directory. exampe : **"demo_syslog_server"**. Or you can decide to work in the **ISE_APIs_Lab-4-Endpoint_Isolation_from_syslog_alerts** folder.
 
 - Then copy into it the whole **ISE_APIs_Lab-4-Endpoint_Isolation_from_syslog_alerts** content into this working directory.
 
@@ -197,16 +197,16 @@ Open a terminal console into the working directory. And roll out the python inst
 
 **READY**
 
-- First step, let's identify in ISE an Endpoint we could use for the demo. The goal is to get close to a real life scenario. So from the ISE Operation => live Session, identify an host in session which has an IP address ( the host must have an IP address ).
+- **Step 1 :**, let's identify in ISE an Endpoint we could use for the demo. The goal is to get close to a real life scenario. So from the ISE Operation => live Session, identify an host in session which has an IP address ( the host must have an IP address ).
 
 Copy the IP address of this host. We need it to setup our demo data.
 
-- Second, deploy the **"demo_syslog_generator**. Go to the terminal console and activate the python virtual environment if not done ( windows type **a** ) And we have to start with the **0-create_syslog_file.py** script. This one creates a customized **syslogs.txt** file which contains syslog Message from Cisco Firewall taken from a real life scenario.
+- **Step 2 :**, deploy the **"demo_syslog_generator"**. Go to the terminal console and activate the python virtual environment if not done ( windows type **a** ) And we have to start with the **0-create_syslog_file.py** script. This one creates a customized **syslogs.txt** file which contains syslog Message from Cisco Firewall taken from a real life scenario.
     - run it and when asked type the IP addess you selected before from ISE Live Logs
     - Okay ready. Don't close this console
     
-- Step 3 : Start he **demo_syslog_server**. Open a second terminal console in the same working directory a activate again a python virtual environment.
-    - run the syslog server ** python syslog_server.py**
+- **Step 3 :** Start he **"demo_syslog_server"**. Open a second terminal console in the same working directory a activate again a python virtual environment.
+    - run the syslog server **python syslog_server.py**
     - You are supposed to see the server waiting for syslogs. Paste the **z_pxgrid-creds.txt** file created by scripts in Lab 3 in the in the **"demo_syslog_server"** working directory.
 
 The syslog server is a very basic tool packaged for the demo. Don't hesitate to review the code, it is quite easy to understand.
@@ -215,7 +215,7 @@ You will see into the code the syslog server part only. the Cisco FTD IPS logs p
  
 For information, I was able to use it in heavy loaded labs environments , and it works very well with a lot of power. It is not only a gadget for demo.
 
-- Step 4 , Let's come back to the **"demo_syslog_generator"** console and run the **1-send_syslog_from_syslogs_text_file.py**
+- **Step 4 :**, Let's come back to the **"demo_syslog_generator"** console and run the **1-send_syslog_from_syslogs_text_file.py**
 
 You are supposed to see parsed syslog messages arriving in the **"demo_syslog_server"** console. When the syslog demo file has been completely sent, then the syslog server displays the list of Attacker IP addresses discovered in logs.
 
@@ -223,9 +223,9 @@ You will be prompted to confirm the Endpoint isolation in ISE. Type **Y** and pr
 
 Then you will recognize the operations we executed during the end of Lab 3.
 
-Once done you can check in ISE ANC Policy Endpoint Assignment that this IP address is now part of the Quarantined enpoint.
+Once done you can check in ISE ANC Policy Endpoint Assignment that this IP address is now part of the Quarantined enpoints.
 
-**Notice ! ** for successful QUARANTINE, as we use the IP address as the endpoint identifier, the ip address must have a current session in ISE, because ISE check this to execute the assignment to QUARANTINE.
+**Notice !** for successful QUARANTINE, as we use the IP address as the endpoint identifier, the ip address must have a current session in ISE, because ISE check this to execute the assignment to QUARANTINE.
 
 If you have look to the syslog server code you will recognize the **7_pxgrid_add_end_point_to_anc_policy.py** code from lab_3. It is mentionned in the import statements as **pxgrid_resources**. We packaged it a little bit for this current lab. It is now customized to handle IP addresses instead of mac addressses as in Lab 3.
 
