@@ -288,9 +288,29 @@ Now the API Call in the **pxgrid_resources** is invoked by the webex bot logic a
 
 # Lab 6 - Automate host isolation thanks to Cisco XDR Automation
 
-In this lab we use XDR Workflows instead of using python scripts. The result must be the same as Lab 6 but completely managed by Cisco XDR.
+In this lab we automation ISE ANC Policy thanks to XDR Workflows instead of using python scripts. 
 
-under contruction
+The result must be the same as Lab 5 but completely managed by Cisco XDR.
+
+**Pre requisit**
+
+Pre requisites for this lab are to have your own XDDR Tenant, or have access to an XDR tenant. 
+
+You must be familiar with XDR workflows as well.If you are Not, Have a look to the [XDR Tutorials](https://github.com/pcardotatgit/XDR_Workflows_and_Stuffs) for this.
+
+You must deploy an XDR Remote for allowing XDR which in on the Public INTERNET to talk with your ISE which might be located into your internal network behinf firewalls.
+
+**The XDR lab**
+
+The First step is to get familiar with XDR automation for this use case.  For all instruction are supposed to be shared with you in the absolutely great PDF documents named **ISE Quarantine Endpoint with XDR**.
+
+**Lab 5 Use case, again but with XDR**
+
+Cisco XDR has a lot of native Atomic Workflows for ISE ANC. They are all based on ISE ERS APIs.
+
+One good challenge is to create new XDR workflows for ISE which manage pxGrid REST APIs, and combine them to workflows that manages Webex Alert Messages.
+
+Some of these workflows are shared in this repository.
 
 # Lab 7 - Automate host isolation thanks to Event Based Detections in SPLUNK
 
