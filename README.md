@@ -318,7 +318,9 @@ In this lab we replace our custom syslog server by splunk. Our final goal remain
 
 We leverage Event Based Detection and Custom Splunk APPs
 
-under contruction
+The Cisco ISE Integration in SPLUNK already has this feature. It is based on pxGrid.
+
+Anyway... let's re do it. Just to learn how to do such things in Splunk.
 
 # Lab 8 - Manage certificates for authentication
 
