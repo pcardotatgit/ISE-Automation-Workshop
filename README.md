@@ -215,9 +215,11 @@ You will see into the code the syslog server part only. the Cisco FTD IPS logs p
  
 For information, I was able to use it in heavy loaded labs environments , and it works very well with a lot of power. It is not only a gadget for demo.
 
-- **Step 4 :**, Let's come back to the **"demo_syslog_generator"** console and run the **1-send_syslog_from_syslogs_text_file.py**
+- **Step 4 :**, Let's come back to the **"demo_syslog_generator"** console and edit the **1-send_syslog_from_syslogs_text_file.py** script. Update the **syslog_server_ip='localhost'** variable with the IP address of the syslog server if needed.
 
-You are supposed to see parsed syslog messages arriving in the **"demo_syslog_server"** console. When the syslog demo file has been completely sent, then the syslog server displays the list of Attacker IP addresses discovered in logs.
+    - run the **1-send_syslog_from_syslogs_text_file.py**
+
+Check the **"demo_syslog_server"** console, you are supposed to see parsed syslog messages arriving into it . When the syslog demo file has been completely sent, then the syslog server displays the list of Attacker IP addresses discovered in logs.
 
 You will be prompted to confirm the Endpoint isolation in ISE. Type **Y** and press ENTER. 
 
@@ -232,17 +234,15 @@ If you have look to the syslog server code you will recognize the **7_pxgrid_add
 **Notice :** When we query ISE for endpoint isolation, then ISE checks that the IP address currently has a session. If not a quarantine failure will be returned. This is why we need the IP address of an endpoint that has a session in ISE. 
 
 
-# Lab 5 - Use Webex Chat Bot to receive alerts on a phone and trigger Endpoint isolation
+# Lab 5 - Use Webex Chat Bot to receive alerts on a phone and to trigger Endpoint isolation
 
-This lab is just here to complete the Lab 4 scenario with an addtional alerting system which brings as an approval process in order to involve Security Administrators in the endpoint isolation process.
+This lab is just here to extend the Lab 4 scenario with an alerting system which brings an approval process to the endpoint isolation operation.
 
-Here, we just add a Webex Bot logic to our syslog server that will send an alert to Security Administrator every time an infected machine is detected. 
+We just add a Webex Bot logic to our syslog server. That webex bot logic will have to manage alerts sent by the detection system from where administrators will be able to confirm manually response actions.
 
-Thanks to this, administrators will be aware of a threat in real time, and they will be able to confirm the host isolation from the alet formular.
+Thanks to this, administrators will be aware of a new host infection in real time, and they will be able to decide isolation of the infected hosts.
 
-In this lab you just have to deploy a new version of the syslog server which includes a webex bot logic, and use it. 
-
-Instruction are shared to link this bot logic to what has been done before.
+In this lab we use everything from Lab 4, and we just start the Webex Bot Logic.. 
 
 We don't details in this lab how the bot logic is built. Because these details are already documented in the Webex Alerting system project in this github.
 
@@ -263,19 +263,26 @@ You know the procedure. It is always the same. Open a dedicated terminal console
 
 **Run the Webex Bot Logic**
 
-Just run the **webex_bot.py**. Then you are supposed to see it waiting for messages.
+Just run the **run_bot.py** into a new python virtual environment console. Then you are supposed to see it starting we no visible errors and finally waiting for messages in the webex room, with a **websocket connected** message which confirms that everything was Okay.
+
+Now, every time we type something in the Webex Room we set up as the alerting room, we will see our message computed in the Webex Bot logic console.
 
 Review the **syslog_server.py** code and pay attention to the way we query the endpoint isolation. 
 
-This is an **if statement** based on the value of the **use_webex_bot** variable.
+There is an **if statement** based on the value of the **use_webex_bot** variable.
 
-If **use_webex_bot** is equal to 1, then instead of querying ISE directly for host isolation, we invoke and **send_messages_to_webex** function which sends an alert formular into the Webex Alert Room. 
+If **use_webex_bot** is equal to 1, then instead of querying ISE directly for host isolation, we invoke and **send_alert** function which sends an alert adaptive card into the Webex Room.
 
-This alert formular ask to the Administrator to confirm the isolation of the mentionned endpoint.
+So stop the syslog server, then edit the **syslog_server.py** script and change the value of the  **use_webex_bot** to **1**. And start again the syslog server.
 
-Administrator just has to click on the confirmation button, then we see in the webex boot logic console, that this answer is captured and a the same ANC QUARANTINE query to ISE from **pxgrid_resources** is invoked but from the Webex Bot logic.
+Run again the **1-send_syslog_from_syslogs_text_file.py** script in order to send again the syslog messages.
 
-A confirmation message will be sent to the webex Alert room to confirm that the operation was executed.
+Same things as before happen except the fact that instead of Query ISe for endpoint isolation, now an alert is sent to the Webex Alert Room.
+
+Confirm the host isolation in the Alert formular. a Final confirmation message will be sent in the Alert Room. Then you can check ISE ANC Policy Endpoint Assignment.
+
+Now the **pxgrid_resources** are invoked by the webex bot logic and not by the syslog server. 
+
 
 # Lab 6 - Automate host isolation thanks to Cisco XDR Automation
 
