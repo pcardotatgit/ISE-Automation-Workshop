@@ -286,7 +286,7 @@ Then you can check ISE ANC Policy Endpoint Assignment.
 Now the API Call in the **pxgrid_resources** is invoked by the webex bot logic after manual confirmation and not automatically by the syslog server. 
 
 
-# Lab 6 - Automate host isolation thanks to Cisco XDR Automation
+# Lab 6 - Automate host isolation thanks to Cisco XDR workflows
 
 In this lab we automation ISE ANC Policy thanks to XDR Workflows instead of using python scripts. 
 
