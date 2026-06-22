@@ -187,37 +187,49 @@ Your challenge in this lab is to detect the attack in real time directly in the 
 
 Pre requisit for this lab : You have done Lab 3.  Copy the **z_pxgrid-creds.txt** file created by scripts in Lab 3. You will have to paste it in the **demo_syslog_server** working directory.
 
+**Prepar this lab**
+
+- Create a working directory. exampe : **demo_syslog_server**. Or you can decide to work in the **ISE_APIs_Lab-4-Endpoint_Isolation_from_syslog_alerts** folder.
+
+- Then copy into it the whole **ISE_APIs_Lab-4-Endpoint_Isolation_from_syslog_alerts** content into this working directory.
+
+Open a terminal console into the working directory. And roll out the python install thanks to the same procedure as usual.
+
+**READY**
+
 - First step, let's identify in ISE an Endpoint we could use for the demo. The goal is to get close to a real life scenario. So from the ISE Operation => live Session, identify an host in session which has an IP address ( the host must have an IP address ).
 
 Copy the IP address of this host. We need it to setup our demo data.
 
-- Second, deploy the **demo_syslog_generator**. Same procedure as usual then from the terminal console open into the working directory you selected for it and start with the **0-create_syslog_file.py**.
+- Second, deploy the **"demo_syslog_generator**. Go to the terminal console and activate the python virtual environment if not done ( windows type **a** ) And we have to start with the **0-create_syslog_file.py** script. This one creates a customized **syslogs.txt** file which contains syslog Message from Cisco Firewall taken from a real life scenario.
     - run it and when asked type the IP addess you selected before from ISE Live Logs
-    - Okay ready. Don't close the console
+    - Okay ready. Don't close this console
     
-- Step 3 : deploy the **demo_syslog_server**, into python virtual environment and just run it. You are supposed to see it waiting for syslogs. Paste the **z_pxgrid-creds.txt** file created by scripts in Lab 3 in the in the **demo_syslog_server** working directory.
+- Step 3 : Start he **demo_syslog_server**. Open a second terminal console in the same working directory a activate again a python virtual environment.
+    - run the syslog server ** python syslog_server.py**
+    - You are supposed to see the server waiting for syslogs. Paste the **z_pxgrid-creds.txt** file created by scripts in Lab 3 in the in the **"demo_syslog_server"** working directory.
 
-The syslog server is a very basic tools packaged for the demo. Don't hesitate to review the code, it is quite easy to understand.
+The syslog server is a very basic tool packaged for the demo. Don't hesitate to review the code, it is quite easy to understand.
 
-You will see into the code the syslog server part, the Cisco FTD IPS logs parser part and the ISE Quarantine part.
-
+You will see into the code the syslog server part only. the Cisco FTD IPS logs parser and the ISE Quarantine parts are actually imported scripts **ftd_syslog_parser.py** and **pxgrid_resources.py** packaged as re usable resources.
+ 
 For information, I was able to use it in heavy loaded labs environments , and it works very well with a lot of power. It is not only a gadget for demo.
 
-- Step 4 , come back to the **demo_syslog_generator** console and run the **1-send_syslog_from_syslogs_text_file.py**
+- Step 4 , Let's come back to the **"demo_syslog_generator"** console and run the **1-send_syslog_from_syslogs_text_file.py**
 
-You are supposed to see parsed syslog messages arriving in the **demo_syslog_server** console. When the syslog demo file has been completely sent, then the syslog server displays the list of Attacker IP addresses discovered in logs followed by result of operation for adding the infected IP address you selected prior.
+You are supposed to see parsed syslog messages arriving in the **"demo_syslog_server"** console. When the syslog demo file has been completely sent, then the syslog server displays the list of Attacker IP addresses discovered in logs.
 
-You can check in ISE ANC Policy Endpoint Assignment that this IP address is now part of the Quarantined enpoint.
+You will be prompted to confirm the Endpoint isolation in ISE. Type **Y** and press ENTER. 
+
+Then you will recognize the operations we executed during the end of Lab 3.
+
+Once done you can check in ISE ANC Policy Endpoint Assignment that this IP address is now part of the Quarantined enpoint.
 
 **Notice ! ** for successful QUARANTINE, as we use the IP address as the endpoint identifier, the ip address must have a current session in ISE, because ISE check this to execute the assignment to QUARANTINE.
 
-If you have look to the syslog server code you will recognize the **7_pxgrid_add_end_point_to_anc_policy.py** from lab_3. We just packaged it a little bit for this current lab.
+If you have look to the syslog server code you will recognize the **7_pxgrid_add_end_point_to_anc_policy.py** code from lab_3. It is mentionned in the import statements as **pxgrid_resources**. We packaged it a little bit for this current lab. It is now customized to handle IP addresses instead of mac addressses as in Lab 3.
 
-You must update the variables in **config_pxgrid.txt** in order to grant the API interaction with ISE. 
-
-The script is now named **pxgrid_add_end_point_to_anc_policy.py** and is imported as an external resources into the syslog server python code. It is now a re usable component, the function it contains can be called directly from the syslog server script.
-
-It is now customized to handle IP addresses instead of mac addressses.
+**Notice :** When we query ISE for endpoint isolation, then ISE checks that the IP address currently has a session. If not a quarantine failure will be returned. This is why we need the IP address of an endpoint that has a session in ISE. 
 
 
 # Lab 5 - Use Webex Chat Bot to receive alerts on a phone and trigger Endpoint isolation
@@ -235,6 +247,35 @@ Instruction are shared to link this bot logic to what has been done before.
 We don't details in this lab how the bot logic is built. Because these details are already documented in the Webex Alerting system project in this github.
 
 [Build a Webex advanced alerting system](https://github.com/pcardotatgit/webex_for_xdr_part-1_card_examples)
+
+**Pre Requisit**
+
+You Must have a Webex Bot created, and you must have a dedicated Webex room which serves as the Alert room into which you are registered and the Webex Bot as well.
+
+You must have :
+
+- The TOKEN of the Webex Bot
+- The ROOM ID of the webex Alert Room.
+
+**Webex Bot Logic Installation**
+
+You know the procedure. It is always the same. Open a dedicated terminal console for the webex bot logic.
+
+**Run the Webex Bot Logic**
+
+Just run the **webex_bot.py**. Then you are supposed to see it waiting for messages.
+
+Review the **syslog_server.py** code and pay attention to the way we query the endpoint isolation. 
+
+This is an **if statement** based on the value of the **use_webex_bot** variable.
+
+If **use_webex_bot** is equal to 1, then instead of querying ISE directly for host isolation, we invoke and **send_messages_to_webex** function which sends an alert formular into the Webex Alert Room. 
+
+This alert formular ask to the Administrator to confirm the isolation of the mentionned endpoint.
+
+Administrator just has to click on the confirmation button, then we see in the webex boot logic console, that this answer is captured and a the same ANC QUARANTINE query to ISE from **pxgrid_resources** is invoked but from the Webex Bot logic.
+
+A confirmation message will be sent to the webex Alert room to confirm that the operation was executed.
 
 # Lab 6 - Automate host isolation thanks to Cisco XDR Automation
 

@@ -5,6 +5,9 @@
 '''
 import glob
 import os
+#from crayons import *
+
+
 
 def init_appli():
     os.remove("a.bat")
@@ -14,7 +17,6 @@ def init_appli():
     #os.remove("e.bat")
     with open('a.bat','w') as file:
         file.write('venv\\scripts\\activate')    
-
         
 if __name__=="__main__":
     #create_structure()

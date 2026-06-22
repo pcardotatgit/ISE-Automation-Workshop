@@ -79,15 +79,8 @@ def send_api_call_function(username,password,method,api_url,headers,payload,resu
     # ===================================================================
     return result,json_txt_result
     
-
 if __name__ == "__main__":
-    #username = "api_admin"
-    #password = "ChangeMe"
-    #host = "198.18.133.27"
-    #port = "443"   
     api_url=f"https://{host}:{port}{relative_url}"
     result,response = send_api_call_function(username,password,method,api_url,headers,payload,result_file_name)
     print(green(response,bold=True))
-    #TODO call the function for applying policy to the endpoints
-    #post_to_ise(maclist, policylist)
     print(white("\n-------- OPERATION DONE -----------",bold=True))

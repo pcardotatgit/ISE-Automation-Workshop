@@ -6,7 +6,8 @@
 import glob
 import os
 
-def init_appli():
+
+def init_appli():  
     os.remove("a.bat")
     os.remove("b.bat")
     os.remove("c.bat")

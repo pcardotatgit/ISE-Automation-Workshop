@@ -5,8 +5,10 @@
 '''
 import glob
 import os
+#from crayons import *
 
-def init_appli():
+
+def init_appli(): 
     os.remove("a.bat")
     os.remove("b.bat")
     os.remove("c.bat")
