@@ -122,7 +122,7 @@ Because in an ideal workshop situation you will use a DCLOUD lab and you will in
 
 # Test API connectivity with ISE
 
-You will do this in less than 2 minutes, in Lab 1 when you run the python script 1.
+You will do this in less than 2 minutes, in Lab 1 when you will run the python script 1.
 
 # Lab 1 - ERS APIs
 
