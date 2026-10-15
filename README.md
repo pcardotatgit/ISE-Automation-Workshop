@@ -83,7 +83,7 @@ These 2 labs gives you complex network environment with a lot of machines and se
 
 Connect your personnal lab laptop to DLCOUD labs thanks to VPN is the best option. This option gives you a strong capability to extend your security scenarios to a lot of custom scenarios.
 
-**Create an ISE API Admin ! : **Don't forget to create an ISE API admin you will use in the lab. For this, in ISE go to **Administration => Admin Access => Administrators** and add a new Admin User in the **ERS Admin** Admin group. ( for information python scripts are using api_admin as default user )
+ **Create an ISE API Admin ! : **Don't forget to create an ISE API admin you will use in the lab. For this, in ISE go to **Administration => Admin Access => Administrators** and add a new Admin User in the **ERS Admin** Admin group. ( for information python scripts are using api_admin as default user )
 
 ## Install the python scripts
 
