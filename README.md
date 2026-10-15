@@ -120,6 +120,10 @@ Now, whenever you want to run the script in the selected lab, you have to open a
 **Why this section ? :**
 Because in an ideal workshop situation you will use a DCLOUD lab and you will install the scripts on the JUMPHOST which is Windows Machine. This procedure is a fast way to install each labs in less than 2 minutes.
 
+# Test API connectivity with ISE
+
+You will do this in less than 2 minutes, in Lab 1 when you run the python script 1.
+
 # Lab 1 - ERS APIs
 
 ERS ( Extend REST Services ) are the legacy REST APIs exposed by ISE. They are just the old Open APIs exposed by ISE. 
