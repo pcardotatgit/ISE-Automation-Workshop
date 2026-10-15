@@ -97,6 +97,10 @@ JUMPHOST Machines in DLCOUD Labs are ready. That means that you can just go to t
 
 ### Fast installation on windows machines.
 
+Roll out the following procedure for every labs ( just because the workshop was splitted in several parts )
+
+**Procedure :**
+
 Download the lab scripts into a working directory into your laptop. Unzip the dowloaded file and open a terminal console into the project root directory. Then
 
 - type **a**
@@ -113,6 +117,8 @@ Okay. Installation is done... It takes only 2 minutes and the JUMPHOST in DCLOUD
 
 Now, whenever you want to run the script in the selected lab, you have to open a CMD console in the script directory, then type the letter **a** to start the python virtual environment and then run the required python scripts.
 
+**Why this section ? :**
+Because in an ideal workshop situation you will use a DCLOUD lab and you will install the scripts on the JUMPHOST which is Windows Machine. This procedure is a fast way to install each labs in less than 2 minutes.
 
 # Lab 1 - ERS APIs
 
