@@ -401,7 +401,7 @@ under construction
 
 under contruction
 
-# Lab 15 - Custom XDR Integration Module ( Relay Module ) for ISE
+# Lab 15 - Custom Relay Module for ISE XDR Integration
 
 under contruction
  
