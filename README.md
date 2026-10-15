@@ -81,7 +81,9 @@ Here are the 2 labs recommended to you :
 
 These 2 labs gives you complex network environment with a lot of machines and servers already installed. These 2 lab heavily use Cisco ISE. You can use some of the labs guides attacheds to these lab to prepare and roll out example of Device Access Control and Device Isolation. And you can bring your own demo which is the option  we will use with the python scripts we have in the API Lab, will will run in the JUMPHOST.
 
-Connect your personnal lab laptop to DLCOUD labs thanks to VPN is the best option. This option gives you a strng capability to extend your security scenarios.
+Connect your personnal lab laptop to DLCOUD labs thanks to VPN is the best option. This option gives you a strong capability to extend your security scenarios to a lot of custom scenarios.
+
+**Create an ISE API Admin ! : **Don't forget to create an ISE API admin you will use in the lab. For this, in ISE go to **Administration => Admin Access => Administrators** and add a new Admin User in the **ERS Admin** Admin group. ( for information python scripts are using api_admin as default user )
 
 ## Install the python scripts
 
