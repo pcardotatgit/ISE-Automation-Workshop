@@ -169,13 +169,13 @@ Installation of the scripts is the same as usual.
 
 Once the python virtual environment has been created and python module installed, edit the **config.json** and **config_pxgrid.json** file and udpate the variables.
 
-In ISE check that pxGrid is enabled. And we have to enable username/password based client authentication. ( once again, use go straight forward and dont use certificate based authentication ). Check in ISE that some pxGrid services are published and available to pxGrid clients. For this lab we the the com.cisco.ise.session, com.cisco.ise.config.anc topics.
+In ISE check that pxGrid is enabled. And check in pxGrid settings Allow password based account creation ( check the checkbox ). ( once again, for lab we go straight forward, we dont use certificate based authentication ). Check in ISE **pxGrid Settings => Client Management => Policy**  that some pxGrid services are published and available to pxGrid clients. For this lab we will use the **com.cisco.ise.session, com.cisco.ise.config.anc** topics.
 
-First we just test that the API connection to ISE is Okay
+This lab starts by hcecking that the API connection to ISE is Okay.
 
-Second we use pxGrid APIs to create a new pxGrid user in ISE. Once you run the script, then the new user appears in ISE pxGrid clients table, in the pending state. You have to approve it manually  in the ISE GUI in order to allow it to consume pxGrid Services. 
+Then we can use pxGrid APIs to create a new pxGrid user in ISE. Once you run the script, then the new user appears in ISE pxGrid clients table, in the pending state. You have to approve it manually  in the ISE GUI in order to allow it to consume pxGrid Services. 
 
-Once the new user approved, then you can consume the pxGrid services.  You run the other python scripts one after the other, Check result eithet in the python console, or in ISE GUI.
+Once the new user approved, then you can consume the pxGrid services.  You run the other python scripts one after the other, Check result either in the python console, or in ISE GUI.
 
 The final goal is to QUARANTINE an Endpoint thank to pxGrid API REST Calls 
 
@@ -405,20 +405,47 @@ under construction
 
 # Lab 13 - ISE Dataconnect
 
-under construction
+ISE Dataconnect feature available since 3.2 version presents ISE deployment as a SQL database you can query from your client.
 
-# Lab 14 - pxGrid CLI
+This feature is an absolutely great feature dedicated to ISE monitoring. It is much more powerful than other APIs ( ERS / Open APIs / pxGrid ) which have limitations and which limit the size of the data we can read. 
 
-under contruction
+ISE Dataconnect is where to go everytime you want to collect anything about the ISE deployment, from components heath to sessions and endpoint authentication activity.
 
-# Lab 15 - Custom Relay Module for ISE XDR Integration
+This lab just package the amazing python script for ISE created by Thomas Howard in his **ISE_Python_Scripts** github repository, in the goal to go very quickly to use python to queray ISE and collect from it a lot of data.
+
+Thomas did an amazing job ! Which saves us a lot of time in python scripts development. Everything we need is already there thanks to what Thomas did, and we just have to use it.
+
+Actually for this lab, in the **ISE_Python_Scripts**  github repository the important script to use is **isesql.py** script which relay on predefined sql queries located in the **./data/SQL/** subfolder.
+
+I just took these 2 things and I repackaged them a little according to my own format and structure, in order to make it very fast to use.
+
+Script installation is the same as usual.
+
+don't forget to enable Dataconnect and create the dataconnect user in ISE ( **Administration => Settings => Data Connect** ). Copy the assigned dataconnect password.
+
+Then edit the **./config.json** file and update the variables. 
+
+Then test the ISE Dataconnect featrure 
+
+    python isesql.py data/SQL/endpoints.sql
+    
+The expected result is a table with the endpoints.
+
+Then have a look the **./data/SQL/** subfolder content and select anyother SQL queries and test them.
+
+Results will be stored as a text file in **/results/dataconnect_result.txt**
+
+# Lab 14 - Custom Relay Module for ISE XDR Integration
 
 under contruction
  
-# Lab 16 - MCP Server for ISE
+# Lab 15 - MCP Server for ISE
 
 under contruction
 
+# Lab 16 - pxGrid CLI
+
+You might need a CLI tool for some pxGrid troubleshooting operation. A library exists for this, you have to install it in a client machine and then use it.
 
 # resources 
 
