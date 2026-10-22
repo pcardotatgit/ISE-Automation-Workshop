@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #!/usr/bin/env python
 '''
-    description : Create a new ANC policy in ISE server
+    description : Get All ANC Policies configured in the ISE server
 '''
 import env as env
 from crayons import *
@@ -30,20 +30,21 @@ port = ""
 #  def main***
 def main():
     """
-    MODIFIED : 2026-06-08
+    MODIFIED : 2026-10-22
     description : starting point
     
     how to call it :
     """
     route="/main"
     env.level+="-"
-    print("\n"+env.level,white("def main() in 6_pxgrid_create_a_new_anc_policy.py : >\n",bold=True))
-    loguer(env.level+" def main() in 6_pxgrid_create_a_new_anc_policy.py : >")
+    print("\n"+env.level,white("def main() in ise_apis_lab_1_ers_apis.py : >\n",bold=True))
+    loguer(env.level+" def main() in ise_apis_lab_1_ers_apis.py : >")
     global username
     global password
     global host
     global port
-    # ===================================================================    
+    # =================================================================== 
+    print(yellow('PURPOSE of this script is to create a new ANC policy in ISE, Name ANC-Quarantine with QUARANTINE as action',bold=True))
     print(yellow('REFERENCE : https://github.com/cisco-pxgrid/pxgrid-rest-ws/wiki/ANC-configuration',bold=True),'\n')
     config=parse_config_to_dict('./config_pxgrid.json')
     username = config["username"]
@@ -69,12 +70,11 @@ def main():
         # Read the credentials from the file
         with open("z_pxgrid-creds.txt", "r") as f:
             pxgrid_username, pxgrid_password = f.read().strip().split(":")     
-            
+    print("\npxgrid_username : ",green(pxgrid_username,bold=True)) 
+    print("\npxgrid_password : ",green(pxgrid_password,bold=True))            
     a=input('\nLets do a service lookup on the com.cisco.ise.config.anc service')
     
-    print("\npxgrid_username : ",pxgrid_username) 
-    print("\npxgrid_password assigned by ISE : ",pxgrid_password) 
-    
+    print('api_url : ',f"{api_url}/ServiceLookup")
     # Lookup trustsec service
     r=requests.post(f"{api_url}/ServiceLookup",
         verify=False,
@@ -86,10 +86,12 @@ def main():
 
     # Raise an exception for HTTP errors
     r.raise_for_status()
-
+    if r.json()["services"]==[]:
+        print(red("We have an Error Here, no services were read !",bold=True))
+        sys.exit()
     # Display the response
     print(cyan(json.dumps(r.json(),indent=2),bold=True))
-
+    
     a=input('\nOkay Now lets get the service information\n  - First lets prepare the variable for the next api calls,\n     from the answer we got prior')
     # Get the service information
     service_info=r.json()["services"][0]
@@ -98,14 +100,16 @@ def main():
     rest_url=service_info["properties"]["restBaseUrl"]
     print("\nrest_url : ",rest_url)
     print("  - We need to tweak it a little bit to fit to the DCLOUD Lab")
-    print("    - Lets replace keyword : ise.securitydemo.net with the ISE IP address which is : "+pxgrid_hostname)
+    print("    - For DCLOUD Lab Only, Lets replace keyword : ise.securitydemo.net with the ISE IP address which is : "+pxgrid_hostname)
     rest_url=rest_url.replace("ise.securitydemo.net",pxgrid_hostname)
+    print("    - For DCLOUD Lab Only, Lets replace keyword : ise.dcloud.local with the ISE IP address which is : "+pxgrid_hostname)    
+    rest_url=rest_url.replace("ise.dcloud.local",pxgrid_hostname)
     print("\nCorrect rest_url for DCLOUD Lab: ",cyan(rest_url,bold=True))
     # Get the nodeName
     node_name=service_info["nodeName"]
     print("\nnode_name : ",cyan(node_name,bold=True))
     a=input('\nOkay Now lets retreive the AccessSecret assigned to our pxGrid node ')
-
+    print('api_url : ',f"{api_url}/AccessSecret")
     # Get Access Secret
     r=requests.post(f"{api_url}/AccessSecret",
         verify=False,
@@ -116,8 +120,8 @@ def main():
     )
     r.raise_for_status()
     pxgrid_secret=r.json()["secret"]
-
-    print("\nOkay, secret to for this pxgrid client is : ",yellow(pxgrid_secret,bold=True))
+    
+    print("\nOkay, secret for this pxgrid client is : ",yellow(pxgrid_secret,bold=True))
    
     print("\npxgrid_username : ",pxgrid_username) 
     print("\npxgrid secret : ",pxgrid_secret) 
@@ -160,8 +164,8 @@ def parse_config_to_dict(config_json_file):
         description : read the file input thru config_json_file and create a dictionnary that contains key names and their value from the json input
     '''
     env.level+='-'
-    print(env.level,white('def parse_config_to_dict() in 6_pxgrid_create_a_new_anc_policy.py  : >\n',bold=True))
-    loguer(env.level+' def parse_config_to_dict() in 6_pxgrid_create_a_new_anc_policy.py : > ')
+    print(env.level,white('def parse_config_to_dict() in 1_ise_ers_get_all_anc_policies.py  : >\n',bold=True))
+    loguer(env.level+' def parse_config_to_dict() in 1_ise_ers_get_all_anc_policies.py : > ')
     with open(config_json_file, 'r') as f:
         conf_result=json.load(f)   
     print(green(conf_result,bold=True))
@@ -178,7 +182,7 @@ def send_api_call_function(username,password,method,api_url,headers,payload,resu
     how to call it : result,json_txt_result=send_api_call_function(username,password,method,api_url,headers,payload)
     '''
     print()
-    print(white('def send_api_call_function() in 6_pxgrid_create_a_new_anc_policy.py  : >\n',bold=True))
+    print(white('def send_api_call_function() in app.py  : >\n',bold=True))
     # ===================================================================                                            
     #params=json.loads(params) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< to troublshoot
     print(cyan('--> API CALL details here under :',bold=True))
@@ -230,5 +234,5 @@ if __name__=="__main__":
         pass
     loguer(env.level+"APPLICATION STARTS - create a new anc policy ")
     main()
-    print(green('\nOK DONE : Check ISE Policy List and check result in [ ./result/create_new_anc_policies.json ]',bold=True))
+    print(green('\nOK DONE : Check ISE Policy List in ISE GUI, and check result in [ ./result/create_new_anc_policies.json ]',bold=True))
 

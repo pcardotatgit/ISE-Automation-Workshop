@@ -37,13 +37,14 @@ def main():
     """
     route="/main"
     env.level+="-"
-    print("\n"+env.level,white("def main() in 5_pxgrid_get_anc_policies.py : >\n",bold=True))
-    loguer(env.level+" def main() in 5_pxgrid_get_anc_policies.py : >")
+    print("\n"+env.level,white("def main() in ise_apis_lab_1_ers_apis.py : >\n",bold=True))
+    loguer(env.level+" def main() in ise_apis_lab_1_ers_apis.py : >")
     global username
     global password
     global host
     global port
-    # ===================================================================    
+    # ===================================================================   
+    print(yellow('PURPOSE of this script is to get the list of configured NAC policies',bold=True))
     print(yellow('REFERENCE : https://github.com/cisco-pxgrid/pxgrid-rest-ws/wiki/ANC-configuration',bold=True),'\n')
     config=parse_config_to_dict('./config_pxgrid.json')
     username = config["username"]
@@ -69,11 +70,10 @@ def main():
         # Read the credentials from the file
         with open("z_pxgrid-creds.txt", "r") as f:
             pxgrid_username, pxgrid_password = f.read().strip().split(":")     
-            
+    print("\npxgrid_username : ",green(pxgrid_username,bold=True)) 
+    print("\npxgrid_password : ",green(pxgrid_password,bold=True))          
     a=input('\nLets do a service lookup on the com.cisco.ise.config.anc service')
-    
-    print("\npxgrid_username : ",pxgrid_username) 
-    print("\npxgrid_password assigned by ISE : ",pxgrid_password) 
+    print('api_url : ',f"{api_url}/ServiceLookup")
     
     # Lookup trustsec service
     r=requests.post(f"{api_url}/ServiceLookup",
@@ -98,14 +98,16 @@ def main():
     rest_url=service_info["properties"]["restBaseUrl"]
     print("\nrest_url : ",rest_url)
     print("  - We need to tweak it a little bit to fit to the DCLOUD Lab")
-    print("    - Lets replace keyword : ise.securitydemo.net with the ISE IP address which is : "+pxgrid_hostname)
+    print("    - For DCLOUD Lab Only, Lets replace keyword : ise.securitydemo.net with the ISE IP address which is : "+pxgrid_hostname)
     rest_url=rest_url.replace("ise.securitydemo.net",pxgrid_hostname)
+    print("    - For DCLOUD Lab Only, Lets replace keyword : ise.dcloud.local with the ISE IP address which is : "+pxgrid_hostname)    
+    rest_url=rest_url.replace("ise.dcloud.local",pxgrid_hostname)
     print("\nCorrect rest_url for DCLOUD Lab: ",cyan(rest_url,bold=True))
     # Get the nodeName
     node_name=service_info["nodeName"]
     print("\nnode_name : ",cyan(node_name,bold=True))
     a=input('\nOkay Now lets retreive the AccessSecret assigned to our pxGrid node ')
-
+    print('api_url : ',f"{api_url}/AccessSecret")
     # Get Access Secret
     r=requests.post(f"{api_url}/AccessSecret",
         verify=False,
@@ -120,6 +122,7 @@ def main():
     print("\nOkay, secret to for this pxgrid client is : ",yellow(pxgrid_secret,bold=True))
 
     a=input('\nOkay Ready !, lets get the anc_policies')
+    print('api_url : ',f"{api_url}/getPolicies")
     # Get the security groups
     r=requests.post(f"{rest_url}/getPolicies",
         verify=False,
@@ -146,8 +149,8 @@ def parse_config_to_dict(config_json_file):
         description : read the file input thru config_json_file and create a dictionnary that contains key names and their value from the json input
     '''
     env.level+='-'
-    print(env.level,white('def parse_config_to_dict() in 5_pxgrid_get_anc_policies.py  : >\n',bold=True))
-    loguer(env.level+' def parse_config_to_dict() in 5_pxgrid_get_anc_policies.py : > ')
+    print(env.level,white('def parse_config_to_dict() in 1_ise_ers_get_all_anc_policies.py  : >\n',bold=True))
+    loguer(env.level+' def parse_config_to_dict() in 1_ise_ers_get_all_anc_policies.py : > ')
     with open(config_json_file, 'r') as f:
         conf_result=json.load(f)   
     print(green(conf_result,bold=True))
@@ -164,7 +167,7 @@ def send_api_call_function(username,password,method,api_url,headers,payload,resu
     how to call it : result,json_txt_result=send_api_call_function(username,password,method,api_url,headers,payload)
     '''
     print()
-    print(white('def send_api_call_function() in 5_pxgrid_get_anc_policies.py  : >\n',bold=True))
+    print(white('def send_api_call_function() in app.py  : >\n',bold=True))
     # ===================================================================                                            
     #params=json.loads(params) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< to troublshoot
     print(cyan('--> API CALL details here under :',bold=True))

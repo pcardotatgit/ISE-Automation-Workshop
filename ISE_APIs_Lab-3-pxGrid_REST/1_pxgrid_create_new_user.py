@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #!/usr/bin/env python
 '''
-    description : Create a nex pxGrid client
+    description : Get All ANC Policies configured in the ISE server
 '''
 import env as env
 from crayons import *
@@ -30,21 +30,23 @@ port = ""
 #  def main***
 def main():
     """
-    MODIFIED : 2026-06-08
+    MODIFIED : 2026-10-20
     description : starting point
     
-    how to call it :
+    how to call it : main()
     """
     route="/main"
     env.level+="-"
-    print("\n"+env.level,white("def main() in 1_pxgrid_create_new_user.py : >\n",bold=True))
-    loguer(env.level+" def main() in 1_pxgrid_create_new_user.py : >")
+    print("\n"+env.level,white("def main() in ise_apis_lab_1_ers_apis.py : >\n",bold=True))
+    loguer(env.level+" def main() in ise_apis_lab_1_ers_apis.py : >")
     global username
     global password
     global host
     global port
     # ===================================================================    
-    #policylist = ise_get_anc_policies()
+    print(yellow('PURPOSE of this script is to create a new pxGrid Client in ISE, and Activate it',bold=True))
+    print(yellow('REFERENCE : https://github.com/cisco-pxgrid/pxgrid-rest-ws/wiki/pxGrid-Consumer',bold=True),'\n')
+    a=input('Press ENTER...')
     config=parse_config_to_dict('./config_pxgrid.json')
     username = config["username"]
     password = config["password"]
@@ -66,8 +68,9 @@ def main():
     if not os.path.exists("z_pxgrid-creds.txt"):
         print("\nz_pxgrid-creds.txt does not exist, then lets create an new pxgrid account\n")
         a=input('\nWe have to create a New pxGrid client')
-        print(red('\nNotice : 503 error might indicate that in ISE pxGrid setting [ Allow password based account creation ] is not enabled !\nOr new pxGrid client is in initiate state then continue',bold=True))
+        print(red('\nNotice : 503 error in the coming step might indicate that in ISE pxGrid setting [ Allow password based account creation ] is not enabled !',bold=True))
         a=input('\nPress Enter to continue')
+        print("\napi_url : ",f"{api_url}/AccountCreate")
         # Create new pxGrid username
         r = requests.post(f"{api_url}/AccountCreate",
             headers=headers,
@@ -83,18 +86,20 @@ def main():
         with open("z_pxgrid-creds.txt", "w") as f:
             f.write(f"{new_pxgrid_client}:{password}")    
     # Read the credentials from the file
+    print("\nOk We have a pxgrid user :\n")
     with open("z_pxgrid-creds.txt", "r") as f:
-        pxgrid_username, pxgrid_password = f.read().strip().split(":")  
+        pxgrid_username, pxgrid_password = f.read().strip().split(":") 
+    print("\npxgrid_username : ",green(pxgrid_username,bold=True)) 
+    print("\npxgrid_password : ",green(pxgrid_password,bold=True))    
     a=input('\nOkay lets activate the new pxGrid Client if not already done')
-    print("\npxgrid_username : ",pxgrid_username) 
-    print("\npxgrid_password assigned by ISE : ",pxgrid_password) 
-    print(yellow('\nStep - 2 : Now we are going to enter into a loop that will end when the new user has been enabled in ISE',bold=True))
+    print(yellow('\nStep - 2 : Now we are going to enter into a loop that will stop when the new user has been enabled in ISE',bold=True))
     a=input('\nPress Enter to continue')
 
     #print("\nusername : ",username) 
     #print("\npassword: ",password) 
     
     # Repeat Activation process until client is approved
+    print("\napi_url : ",f"{api_url}/AccountActivate",'\n')
     while True:
         # Send Account Activate request
         r=requests.post(f"{api_url}/AccountActivate",
@@ -111,7 +116,7 @@ def main():
         # Wait for 1 seconds before retrying
         sleep(1)    
     # ===================================================================
-    #loguer(env.level+" def END OF main() in 1_pxgrid_create_new_user.py : >")    
+    #loguer(env.level+" def END OF main() in ise_apis_lab_1_ers_apis.py : >")    
     env.level=env.level[:-1]
     return 'ok'    
 
@@ -123,8 +128,8 @@ def parse_config_to_dict(config_json_file):
         description : read the file input thru config_json_file and create a dictionnary that contains key names and their value from the json input
     '''
     env.level+='-'
-    print(env.level,white('def parse_config_to_dict() in 1_pxgrid_create_new_user.py  : >\n',bold=True))
-    loguer(env.level+' def parse_config_to_dict() in 1_pxgrid_create_new_user.py : > ')
+    print(env.level,white('def parse_config_to_dict() in 1_ise_ers_get_all_anc_policies.py  : >\n',bold=True))
+    loguer(env.level+' def parse_config_to_dict() in 1_ise_ers_get_all_anc_policies.py : > ')
     with open(config_json_file, 'r') as f:
         conf_result=json.load(f)   
     print(green(conf_result,bold=True))
@@ -141,7 +146,7 @@ def send_api_call_function(username,password,method,api_url,headers,payload,resu
     how to call it : result,json_txt_result=send_api_call_function(username,password,method,api_url,headers,payload)
     '''
     print()
-    print(white('def send_api_call_function() in 1_pxgrid_create_new_user.py  : >\n',bold=True))
+    print(white('def send_api_call_function() in app.py  : >\n',bold=True))
     # ===================================================================                                            
     #params=json.loads(params) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< to troublshoot
     print(cyan('--> API CALL details here under :',bold=True))
