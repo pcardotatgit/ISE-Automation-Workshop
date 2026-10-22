@@ -33,7 +33,7 @@ port = ""
 #  def quarantine_endpoint***
 def quarantine_endpoint(endpoint_ip_address):
     """
-    MODIFIED : 2026-06-21T17:31:12.000Z
+    MODIFIED : 2026-10-22
 
     description : Quarantine endpoint by IP address in ISE
     
@@ -45,13 +45,13 @@ def quarantine_endpoint(endpoint_ip_address):
     loguer(env.level+" def quarantine_endpoint() in pxgrid_resources.py : >")
     # ===================================================================    
     print(yellow('REFERENCE : https://github.com/cisco-pxgrid/pxgrid-rest-ws/wiki/ANC-configuration',bold=True),'\n')
-    a=input(f'Is the ISE server IP address is {endpoint_ip_address} ? Press Enter to confirm or enter the correct ip address : ')
+    a=input(f'Is the ISE server IP address = 198.18.133.27 ? Press Enter to confirm or enter the correct ip address then Press Enter : ')
     if a=='':
         pxgrid_hostname='198.18.133.27'
     else:
         pxgrid_hostname=a
     relative_url='/pxgrid/control'
-    port='8089'
+    port='8910'
     api_url=f"https://{pxgrid_hostname}:{port}{relative_url}"
     
     print('api_url : ',yellow(api_url,bold=True))
@@ -60,7 +60,7 @@ def quarantine_endpoint(endpoint_ip_address):
         
     # Check if the credentials file exists
     if not os.path.exists("z_pxgrid-creds.txt"):
-        print(red("\nERROR no z_pxgrid-creds.txt file found in the syslog server directory !\n",bold=True))
+        print(red("\nERROR [ z_pxgrid-creds.txt ] file NOT FOUND in the syslog server directory !\n",bold=True))
         print(yellow("\n=> Copy it from Lab 3 into the syslog server directory OR Run again Lab 3 from this directory to create a new pxgrid client\n",bold=True))
         sys.exit()
     else:

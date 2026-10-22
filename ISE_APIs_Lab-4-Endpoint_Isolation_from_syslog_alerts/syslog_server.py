@@ -16,20 +16,26 @@ from send_webex_messages import *
 
 dateTime = datetime.now()
 HOST, PORT = "0.0.0.0", 514
-use_webex_bot=1
+use_webex_bot=0
 
 # here under syslog server functions
 class SyslogUDPHandler(socketserver.BaseRequestHandler):
-
+    '''
+        version : 2026-10-22
+        description : main function - the syslog server
+    '''
     def handle(self):
         global use_webex_bot
         # get syslog message receive in the socket
         data = bytes.decode(self.request[0].strip())
         socket = self.request[1]
         syslog=str(data) # put it into the syslog variable
+        print(yellow(syslog))
         # ok here under let's do basic parsing and let's keep only FTD IPS alerts BUT dont keep syslogs with 'PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority'
         if '%FTD' in syslog and 'SID' in syslog and 'PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority' not in syslog and 'PROTOCOL-DNS TMG Firewall Client long host entry exploit attempt' not in syslog and 'MALWARE-CNC DNS Fast Flux attempt' not in syslog:
-            the_log=parse_ftd_single_log(syslog)    
+            the_log=parse_ftd_single_log(syslog) 
+        if 'CISE' in syslog and 'Accounting' in syslog:
+            print(cyan(syslog,bold=True))
         if '<END>' in syslog:
             with open('./bad_ip.txt') as file:
                 internal_ip=file.read()
@@ -41,7 +47,7 @@ class SyslogUDPHandler(socketserver.BaseRequestHandler):
                 else:    
                     print('-',ip)
             print('\n===========================================')
-            print(yellow('- Use pxGrid REST APIs and query Cisco ISE for quarantine for : '+ip,bold=True))
+            print(yellow('- Use pxGrid REST APIs and query Cisco ISE for quarantine for : '+infected_ip_address,bold=True))
             a= input('\nDo You want ISE to add this ip Address to the ANC Policy ? Y / N : ')
             if a=='Y' or a=='y':  
                 if use_webex_bot:
@@ -53,7 +59,7 @@ class SyslogUDPHandler(socketserver.BaseRequestHandler):
                     result=quarantine_endpoint(infected_ip_address) # Query ISE pxgrid API to isolate endpoint
                     result = { 'status':'ISE Isolation Requested'}
             else:
-                result = { 'status':'Dont isolate'}
+                result = { 'status':'Decision by admin = Dont isolate '}
             print("\nresult : ",yellow(result,bold=True))                 
             if result['status']=='FAILURE':
                 print(red('- ERROR !',bold=True))

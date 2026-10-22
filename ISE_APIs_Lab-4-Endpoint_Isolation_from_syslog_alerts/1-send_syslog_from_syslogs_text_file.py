@@ -24,6 +24,6 @@ if __name__=='__main__':
         if line!='':
             print(line)
             send_syslogs(line,syslog_server_ip)
-            #time.sleep(1)
+            time.sleep(0.1)
     print('\nOK ALL DONE\n')
     
