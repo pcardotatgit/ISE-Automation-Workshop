@@ -1,0 +1,24 @@
+crayons
+ijson
+#asyncio         # async I/O whenever possible
+#aiocsv          # async CSV files
+#aiofiles        # async file I/O
+#aiohttp         # asynchronous HTTP/S
+#aiohttp_client_cache # caching!
+#aiosqlite       # AIO HTTP Client cache backend
+argparse        # CLI commands and options
+#bs4             # HTML parsing
+#ciscoisesdk     # ISE Python REST API wrapper
+#faker           # generate fake users, MACs, IPs
+#meraki          # Cisco Meraki
+oracledb        # Oracle DB thin client for ISE Data Connect queries
+#pandas          # import and manipulate data in Pandas DataFrames
+#pxgrid-util     # Cisco pxGrid utilities
+#pytest          # unit testing
+PyYAML          # YAML
+requests        # synchronous HTTP/S
+#semantic-version # semantic version comparisons
+#setuptools      # run scripts without needing .py extension
+tabulate        # dump data in tables
+#tqdm            # terminal progress bar
+urllib3         # URLs
