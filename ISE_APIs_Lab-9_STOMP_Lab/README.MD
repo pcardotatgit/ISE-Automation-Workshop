@@ -2,6 +2,16 @@
 
 This lab aims to get you familiar with the STOMP architecture which is used by ISE pxGrid.
 
+STOMP is a simple and very efficient messaging system which is used by pxGrid Services.
+
+Entities involved into ISE pxGrid use space queues named topics to exchange information with each other.
+
+In this concept we have entities that publish information into topics, entities who susbcribed to the topics will see everything that is published and will be able to do things with it. Entities can be only publishers, or only susbcribers or both. 
+
+And we have a central server which managing the messaging service, authorize entities to subscribed to topics and manage topics the messaging queues.
+
+We will play with all this in this lab
+
 The architecture of our lab contains  :
 
 - a STOMP server which manages a messaging service
@@ -10,7 +20,7 @@ The architecture of our lab contains  :
 
 # Setup the server
 
-Let's use CoilMQ which is a STOMP server from the python community. This one is straight forward to install.
+Let's use CoilMQ which is a fast to STOMP server from the python community. This one is very straight forward to install.
 
 [CoilMQ getting started](https://github.com/hozn/coilmq/wiki/Getting-Started)
 
@@ -38,11 +48,11 @@ The server starts and listen on localhost on port 61613.  ( You will probably ha
 
 The server is now waiting for connections from publishers and subscribers.
 
-# Install a STOMP publisher
+# Now let's install a STOMP publisher
 
-Once again we are going to use a ready to use package from the python community. A STOMP Client module [stompl.py]( https://jasonrbriggs.codeberg.page/stomp.py.pages/quickstart.html)
+We can use python script for this, but once again we are going to use a ready to use package from the python community. A STOMP Client module [stompl.py]( https://jasonrbriggs.codeberg.page/stomp.py.pages/quickstart.html)
 
-Here are the steps :
+Here are the installation steps :
 
 - create another working directory and create a python virtual environment into it. Or you can open a second terminal and activate the python environment ( type : a )
 - Install the stomp client python module , from a terminal console open into this second working directory.
@@ -55,7 +65,7 @@ We are ready to go and we can test our setup at this stage thank to STOMP CLI cl
 
     **stomp -H localhost -P 61613**
     
-You are supposed to see the prompt changing to **>** ( greater than ), meaning that the session is started and you can send commands.
+You are supposed to see the prompt changing to **>** ( greater than ), meaning that the session is started on the STOMP server and you can send commands.
 
 - Now type :
 
@@ -63,7 +73,7 @@ You are supposed to see the prompt changing to **>** ( greater than ), meaning t
     
     - **send /queue/test hello world**
     
-You probable understand what we do here. We subscribe to a queue named queue/test and we send the "hello world" message into it.
+You probable understand what we do here. First We subscribe to a queue named **queue/test** and Second we send the "hello world" message into it.
 
 - Our Stomp Client is still connected you can type :
 
@@ -71,16 +81,32 @@ You probable understand what we do here. We subscribe to a queue named queue/tes
     
 This command display the STOMP commands we can execute. And we see that the set of commands is very basic. Largely enough for what we want to do.
 
-We can move to the next step. Let's use a python STOMP publisher.
+We can move to the next step. Now Let's use a python as STOMP publisher.
 
-The python script named **publisher_send_message.py** is an example of STOMP publisher. Open it a review it.
+The python script named **publisher_send_message.py** is an example of quick and dirty STOMP publisher. Open it a review it.
+
+You should be able to easily understand what it does. We have a python class which manages STOMP services. 
+
+- We start STOMP Services
+
+- Authenticate and Connect to the central server
+
+- We subscribe to an existing topic
+
+- We send a message to it
+
+- We wait 2 second and we disconnect
+
+This python script doesn't stay connected to the STOMP server.
 
 The [STOMP publisher instructions]( https://twiki.cern.ch/twiki/bin/view/EGEE/MsgTutorial ) gives good explanations about how it works.
 Have a look to the section which describe the Listener. We see the instructions needed to establish the connection with the STOMP server and we understand that we have to setup a listener class which manages events like receiving messages.
 
 So we understand that once connected to the server and subscrided to a topic ( a Queue ) our STOMP client is watching this Queue and monitors every messages that will come into it. The **def on_message(self, headers, body):** of this class will capture every messages sent ot the queue in the **headers** and **body** variable, then we will be able to compute them inside this function.
 
-Don't exit from the CLI STOMP Client, we will use it later. Open a third terminal console into the same working directory and activate again the python virtual environment.
+Don't exit from the CLI STOMP Client we started prior, we will use it later. 
+
+Open a third terminal console into the same working directory and activate again the python virtual environment.
 
 - Run the **publisher_send_message.py** script. 
 
@@ -94,14 +120,14 @@ This message actually comes from the queue in the STOMP server and you probably 
 
 **STILL UNDER CONSTRUCTION**
 
-Our final goal is to have subscribers that will see messages sent by publishers.
+Our final goal is to have several subscribers located in separte locations, that will see messages sent by publishers.
 
 **Option 1**
 
 We already have one subscriber which is the CLI STOMP Client we used prior.
 
 Go back to it, or open again a terminal console and activate the python virtual environment.
-Then connect again and suscribe to the /queue/test topic exactly as we did prior. Then waiting
+Then connect again and suscribe to the /queue/test topic exactly as we did prior. Then wait for messages
 
 **Option 2**
 
@@ -111,11 +137,13 @@ Repeat the installation step used for the publisher and run **subscriber.py**.
 
 The script is waiting now for messages.
 
-**Try It**
+**Send Message to the messages queue**
 
 Go back to the publisher and then send a new message to the Queue. 
 
 The expected result is to see this message in the subscriber console.
 
-Every suscribers connected to the topic will see the same message in real time.
+Every suscribers connected to the same topic will see the same message at the same time, in real time.
+
+
 
