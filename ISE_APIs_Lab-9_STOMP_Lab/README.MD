@@ -8,7 +8,7 @@ Entities involved into ISE pxGrid use space queues named topics to exchange info
 
 In this concept we have entities that publish information into topics, entities who susbcribed to the topics will see everything that is published and will be able to do things with it. Entities can be only publishers, or only susbcribers or both. 
 
-And we have a central server which managing the messaging service, authorize entities to subscribed to topics and manage topics the messaging queues.
+And we have a central server which managing the messaging service, authorize entities to subscribed to topics and manage topics ( the messaging queues ).
 
 We will play with all this in this lab
 
