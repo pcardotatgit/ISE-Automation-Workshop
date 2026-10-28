@@ -77,7 +77,7 @@ A straight forward solution if you want to avoid to setup your self an ISE lab w
 Here are the 2 labs recommended to you :
 
 - **Cisco ISE 3.4.5 Enterprise and Security Integrations**
-- **Cisco Secure Network Analytics 7.5.3 Test Drive v1.0**
+- **Cisco Secure Network Analytics 7.6 Lab v1**
 
 These 2 labs gives you complex network environment with a lot of machines and servers already installed. These 2 lab heavily use Cisco ISE. You can use some of the labs guides attacheds to these lab to prepare and roll out example of Device Access Control and Device Isolation. And you can bring your own demo which is the option  we will use with the python scripts we have in the API Lab, will will run in the JUMPHOST.
 
