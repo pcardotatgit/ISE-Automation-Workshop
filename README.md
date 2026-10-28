@@ -316,7 +316,7 @@ Use your own ISE environment or book one of the following Labs in DCLOUD :
 
 You must be familiar with XDR workflows as well.If you are Not, Have a look to the [XDR Tutorials](https://github.com/pcardotatgit/XDR_Workflows_and_Stuffs) for this.
 
-You must deploy an XDR Remote for allowing XDR which is on the Public INTERNET to talk with your ISE which might be located into your internal network behinf firewalls.
+You must deploy an XDR Remote for allowing XDR which is on the Public INTERNET to talk with your ISE which might be located into your internal network behind firewalls.
 
 A dedicated Lab Guide is available for this part. Ask it to me.
 
