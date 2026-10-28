@@ -187,7 +187,7 @@ Now let's do it for real, exactly like we would want to deploy an Isolation serv
 
 If we discover an infected Endpoint thanks to any detection solution, then we want to automatically exclude it out of the network.
 
-We can use the **Cisco Secure Network Analytics 7.5.3 Test Drive v1.0** DLCOUD lab to reproduce completely this scenario, but instead of doing that, let's use a custom syslog server and let's send to it syslog Cisco Secure Firewall IPS messages that alert about an internal IP address that is sending XSS and SQL Injection Attacks to internal Web Server.
+We can use the **Cisco Secure Network Analytics 7.5.3 Test Drive v1.0** DLCOUD lab to reproduce completely this scenario, or the **Cisco Secure Network Analytics 7.6 Lab v1** Lab. But instead of doing that, let's use a custom syslog server and let's send to it syslog Cisco Secure Firewall IPS messages that alert about an internal IP address that is sending XSS and SQL Injection Attacks to internal Web Server.
 
 This kind of alert is what we can call an High fidelity alert which confirms us that we have an infected machine. And then the priority become to exclude it out of the network.
 
@@ -298,7 +298,7 @@ Then you can check ISE ANC Policy Endpoint Assignment.
 Now the API Call in the **pxgrid_resources** is invoked by the webex bot logic after manual confirmation and not automatically by the syslog server. 
 
 
-# Lab 6 - Automate host isolation thanks to Cisco XDR workflows
+# Lab 6 - Automate host isolation thanks to Automation Workflows in Cisco Cloud Control Meraki or Cisco XDR
 
 In this lab we automation ISE ANC Policy thanks to XDR Workflows instead of using python scripts. 
 
@@ -306,11 +306,19 @@ The result must be the same as Lab 5 but completely managed by Cisco XDR.
 
 **Pre requisit**
 
-Pre requisites for this lab are to have your own XDDR Tenant, or have access to an XDR tenant. 
+Pre requisites for this lab are to have your own XDR Tenant, or have access to an XDR tenant. 
+You need to deploy an Remote Appliance for XDR or Cisco Cloud Control.
+
+Use your own ISE environment or book one of the following Labs in DCLOUD :
+
+- **Cisco ISE 3.4.5 Enterprise and Security Integrations**
+- **Cisco Secure Network Analytics 7.6 Lab v1**
 
 You must be familiar with XDR workflows as well.If you are Not, Have a look to the [XDR Tutorials](https://github.com/pcardotatgit/XDR_Workflows_and_Stuffs) for this.
 
-You must deploy an XDR Remote for allowing XDR which in on the Public INTERNET to talk with your ISE which might be located into your internal network behinf firewalls.
+You must deploy an XDR Remote for allowing XDR which is on the Public INTERNET to talk with your ISE which might be located into your internal network behinf firewalls.
+
+A dedicated Lab Guide is available for this part. Ask it to me.
 
 **The XDR lab**
 
@@ -415,9 +423,11 @@ This lab just package the amazing python script for ISE created by Thomas Howard
 
 Thomas did an amazing job ! Which saves us a lot of time in python scripts development. Everything we need is already there thanks to what Thomas did, and we just have to use it.
 
-Actually for this lab, in the **ISE_Python_Scripts**  github repository the important script to use is **isesql.py** script which relay on predefined sql queries located in the **./data/SQL/** subfolder.
+Actually for this lab, in the **ISE_Python_Scripts**  github repository the important script to use is **iseql.py** script which rely on predefined sql queries located in the **./data/SQL/** subfolder.
 
-I just took these 2 things and I repackaged them a little according to my own format and structure, in order to make it very fast to use.
+I just took these 2 things and I repackaged them a little bit according to my own format and structure, in order to make it very fast to use.
+
+From the **isesql.py** I wrote the **ise_dataconnect.py** script which is the one to run later in this lab.
 
 Script installation is the same as usual.
 
@@ -427,7 +437,7 @@ Then edit the **./config.json** file and update the variables.
 
 Then test the ISE Dataconnect featrure 
 
-    python isesql.py data/SQL/endpoints.sql
+    python ise_dataconnect.py data/SQL/endpoints.sql
     
 The expected result is a table with the endpoints.
 
